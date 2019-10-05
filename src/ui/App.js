@@ -29,7 +29,7 @@ const DataFetcher = ({render}) => (
       `}
     >
       {({ data }) =>  {
-        return data ? render(data) : <div>Loading ...</div>)
+        return data ? render(data) : <div>Loading ...</div>;
       }}
     </Query>
   </ApolloProvider>

@@ -1,7 +1,7 @@
 import React from "react";
 import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
-import { FirstStageBooster } from './Components/FirstStageBooster.jsx';
+import { FirstStageBooster } from './FirstStageBooster.jsx';
 
 import "./styles/App.css";
 import { Identity } from './identity/Widget.jsx';

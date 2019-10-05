@@ -12,6 +12,9 @@ module.exports = db => ({
     },
     user: async (root, args, context) => {
       return sampleUser.find(v => v.userId === args.userId)
+    },
+    me: async (root, args, context) => {
+      return context.user ? context.user.user_metadata.full_name : '';
     }
   }
 });

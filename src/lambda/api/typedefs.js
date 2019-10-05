@@ -27,5 +27,6 @@ module.exports = gql`
     hello: String
     user(userId: ID!): UserProfile
     trips(userId: ID): [Trip]
+    me: String
   }
 `;

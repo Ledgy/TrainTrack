@@ -24,12 +24,20 @@ const DataFetcher = ({render}) => (
     <Query
       query={gql`
       {
-        hello
+        user(userId: 10) {
+          name
+        }
+        me
       }
       `}
     >
       {({ data }) =>  {
-        return data ? render(data) : <div>Loading ...</div>;
+        return (
+          <div>
+            <div>Welcome {data && data.me ? data.me : ""}</div>
+            <div>Loaded {data && data.user ? data.user.name : ""}</div>
+          </div>
+        )
       }}
     </Query>
   </ApolloProvider>

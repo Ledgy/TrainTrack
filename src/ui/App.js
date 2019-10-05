@@ -6,8 +6,17 @@ import { FirstStageBooster } from './Components/FirstStageBooster.jsx';
 import "./styles/App.css";
 import { Identity } from './identity/Widget.jsx';
 
+
 const client = new ApolloClient({
-  uri: "/.netlify/functions/graphql"
+  uri: "/.netlify/functions/graphql",
+  request: (operation) => {
+    const token = localStorage.getItem('token')
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    })
+  }
 });
 
 const DataFetcher = ({render}) => (

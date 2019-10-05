@@ -16,13 +16,29 @@ npm install netlify-cli -g
 
 All functions are compiled with webpack using the Babel Loader, so you can use modern JavaScript, import npm modules, etc., without any extra setup.
 
+
 ## Local Development
 
-Before developing, clone the repository and run `yarn` from the root of the repo to install all dependencies.
+Before developing, clone the repository:
+```git clone https://github.com/Ledgy/TrainTrack```
+
+Navigate into the newly created TrainTrack directory, and run:
+```
+brew install yarn
+brew install netlify-cli
+npm install
+```
+
+To start your app server, run:
+```
+netlify dev
+```
+
+This will open a local server running at `http://localhost:3000` with your app
 
 ### Run the functions dev server
 
-From inside the project folder, run:
+From inside the project folder, run `yarn` to install all dependencies and then:
 
 ```
 yarn start:lambda

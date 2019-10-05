@@ -8,6 +8,7 @@ module.exports = gql`
   }
 
   type Query {
+    hello: String
     allTodos: [Todo]
   }
 `;

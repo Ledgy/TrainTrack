@@ -8,7 +8,7 @@ const client = new ApolloClient({
   uri: "/.netlify/functions/graphql"
 });
 
-const LambdaDemo = () => (
+const DataFetcher = ({render}) => (
   <ApolloProvider client={client}>
     <Query
       query={gql`
@@ -17,22 +17,17 @@ const LambdaDemo = () => (
         }
       `}
     >
-      {({ data }) => <div>A greeting from the server: {data.hello}</div>}
+      {({ data }) =>  data ? render(data) : <div>Loading...</div>}
     </Query>
   </ApolloProvider>
 );
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to Train Track</h1>
-        </header>
-        <LambdaDemo />
-      </div>
-    );
-  }
-}
+export const App = () =>  (
+  <div className="App">
+    <header className="App-header">
+      <h1 className="App-title">Welcome to Train Track</h1>
+    </header>
+    <DataFetcher render={data => <div>{data.hello}</div>} />
+  </div>
+);
 
-export default App;

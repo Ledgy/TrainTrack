@@ -6,7 +6,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 const client = new ApolloClient({
-  uri: "/.netlify/functions/mongodb-graphql"
+  uri: "/.netlify/functions/graphql"
 });
 
 const LambdaDemo = () => (

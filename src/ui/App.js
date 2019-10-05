@@ -13,7 +13,7 @@ const client = new ApolloClient({
     const token = localStorage.getItem('token')
     operation.setContext({
       headers: {
-        authorization: token ? `Bearer ${token}` : ''
+        Authorization: token ? `Bearer ${token}` : ''
       }
     })
   }
@@ -31,7 +31,7 @@ const DataFetcher = ({render}) => (
       `}
     >
       {({ data }) =>  {
-        return (<div>Welcome {data.user ? data.user.name : ""}</div>)
+        return (<div>Welcome {data && data.user ? data.user.name : ""}</div>)
       }}
     </Query>
   </ApolloProvider>

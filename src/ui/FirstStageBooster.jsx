@@ -2,11 +2,9 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import { Home } from './Pages/Home.jsx';
+import { Profile } from './Pages/Profile.jsx'
 
-const Profile = () => <div>Profile!</div>;
-
-
-export const FirstStageBooster = ({data}) => (
+export const FirstStageBooster = ({ data }) => (
   <div test={console.log(data)}>
     <BrowserRouter>
       <nav>
@@ -15,7 +13,7 @@ export const FirstStageBooster = ({data}) => (
       </nav>
       <Switch>
         <Route path="/profile">
-          <Profile />
+          <Profile name="T‘Pol"/>
         </Route>
         <Route path="/">
           <Home />

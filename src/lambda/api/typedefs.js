@@ -8,12 +8,20 @@ module.exports = gql`
   }
 
   type Trip {
+<<<<<<< HEAD
     id: ID
     userId: String
     origin: Location
     destination: Location
     distance: Int
     date: Int
+=======
+    userId: ID
+    origin: LocationType
+    destination: LocationType
+    timestamp: String
+    distance: Int
+>>>>>>> use fixtures for sample query data
     roundtrip: Boolean
   }
 

@@ -6,10 +6,23 @@ Keeping the world on track with _TrainTrack_!
 
 ## Setup
 
-Install `netlify` client:
+Install mongodb locally (Mac):
 
 ```
-npm install netlify-cli -g
+brew tap mongodb/brew
+brew install mongodb-community@4.0
+```
+
+To run mongodb once:
+
+```
+mongod --config /usr/local/etc/mongod.conf
+```
+
+To run mongodb started at login:
+
+```
+brew services start mongodb/brew/mongodb-community@4.0
 ```
 
 ## Babel/webpack compilation
@@ -35,6 +48,18 @@ netlify dev
 ```
 
 This will open a local server running at `http://localhost:3000` with your app
+
+Install `netlify` client:
+
+```
+npm install netlify-cli -g
+```
+
+To run both lambda functions and the app dev server:
+
+```
+netlify dev
+```
 
 ### Run the functions dev server
 

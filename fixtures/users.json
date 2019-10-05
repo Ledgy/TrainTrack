@@ -1,0 +1,22 @@
+[
+  {
+    "userId": "10",
+    "name": "T‘Pol",
+    "city": {
+      "displayName": "Nice, France",
+      "latitude": 43.7101728,
+      "longitude": 7.261953200000001
+    },
+    "country": "FR"
+  },
+  {
+    "userId": "21",
+    "name": "The Borg Queen",
+    "city": {
+      "displayName": "Hell, Norway",
+      "latitude": 63.44517149999999,
+      "longitude": 10.9052167
+    },
+    "country": "NO"
+  }
+]

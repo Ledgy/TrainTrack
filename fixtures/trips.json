@@ -1,0 +1,66 @@
+[
+  {
+    "userId": "10",
+    "origin": {
+      "displayName": "Zürich, Switzerland",
+      "latitude": 47.3768866,
+      "longitude": 8.541694
+    },
+    "destination": {
+      "displayName": "Athens, Greece",
+      "latitude": 37.9838096,
+      "longitude": 23.7275388
+    },
+    "distance": 2414728,
+    "timestamp": 1571668813,
+    "roundtrip": false
+  },
+  {
+    "userId": "10",
+    "origin": {
+      "displayName": "Nice, France",
+      "latitude": 43.7102,
+      "longitude": 7.262
+    },
+    "destination": {
+      "displayName": "Marseilles, France",
+      "latitude": 43.2965,
+      "longitude": 5.3698
+    },
+    "timestamp": 1569916813,
+    "distance": 223885,
+    "roundtrip": true
+  },
+  {
+    "userId": "10",
+    "origin": {
+      "displayName": "Oslo Central Station, Jernbanetorget 1, 0154 Oslo, Norway",
+      "latitude": 59.91109599999999,
+      "longitude": 10.7524574
+    },
+    "destination": {
+      "displayName": "Copenhagen Central Station, København, Denmark",
+      "latitude": 55.6727611,
+      "longitude": 12.5649245
+    },
+    "timestamp": 1569823200,
+    "distance": 663708,
+    "roundtrip": false
+  },
+  {
+    "userId": "21",
+    "origin": {
+      "displayName": "Copenhagen Central Station, København, Denmark",
+      "latitude": 55.6727611,
+      "longitude": 12.5649245
+    },
+    "destination": {
+      "displayName": "Zurich Main Station, Bahnhofpl., 8001 Zürich, Switzerland",
+      "latitude": 47.37840449999999,
+      "longitude": 8.538403299999999
+    },
+    "date": 1570107600,
+    "distance": 1438006,
+    "roundtrip": false
+  }
+]

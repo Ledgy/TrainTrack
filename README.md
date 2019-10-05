@@ -1,5 +1,7 @@
 ## TrainTrack
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/56e7dcca-dca3-4516-bfec-a1fead6ee773/deploy-status)](https://app.netlify.com/sites/train-track/deploys)
+
 Keeping the world on track with _TrainTrack_!
 
 ## Setup

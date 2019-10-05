@@ -4,6 +4,7 @@ import { ApolloProvider, Query } from "react-apollo";
 import { FirstStageBooster } from './Components/FirstStageBooster.jsx';
 
 import "./styles/App.css";
+import { Identity } from './identity/Widget.jsx';
 
 const client = new ApolloClient({
   uri: "/.netlify/functions/graphql"
@@ -29,6 +30,7 @@ export const App = () =>  (
       <h1 className="App-title">Welcome to Train Track</h1>
     </header>
     <DataFetcher render={data => <FirstStageBooster data={data} />} />
+    <Identity />
   </div>
 );
 

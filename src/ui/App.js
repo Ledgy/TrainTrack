@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
+import { FirstStageBooster } from './Components/FirstStageBooster.jsx';
 
 import "./styles/App.css";
 
@@ -27,7 +28,7 @@ export const App = () =>  (
     <header className="App-header">
       <h1 className="App-title">Welcome to Train Track</h1>
     </header>
-    <DataFetcher render={data => <div>{data.hello}</div>} />
+    <DataFetcher render={data => <FirstStageBooster data={data} />} />
   </div>
 );
 

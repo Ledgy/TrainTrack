@@ -1,31 +1,32 @@
 const { gql } = require("apollo-server-lambda");
 
 module.exports = gql`
-
-  type LocationType {
+  type Location {
     latitude: Float
     longtitude: Float
     displayName: String
   }
 
   type Trip {
-    userId: ID
-    origin: LocationType
-    destination: LocationType
-    date: String
+    id: ID
+    userId: String
+    origin: Location
+    destination: Location
+    distance: Int
+    date: Int
+    roundtrip: Boolean
   }
 
-  type userProfile {
-    userId: ID
+  type UserProfile {
+    id: ID
     name: String
-    city: LocationType
+    city: Location
     country: String
   }
 
   type Query {
     hello: String
-    location: LocationType
-    trip: Trip
-    user: userProfile
+    user(id: ID!): UserProfile
+    trip(id: ID!): Trip
   }
 `;

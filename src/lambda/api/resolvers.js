@@ -4,14 +4,11 @@ module.exports = db => ({
     hello: async (root, args, context) => {
       return "Hello, world!";
     },
-    location: async () => {
-      return sampleLocation;
+    trip: async (root, args, context) => {
+      return {id: args.id,date: new Date(2012, 11, 24)};
     },
-    trip: async () => {
-      return {date: new Date(2012, 11, 24)};
-    },
-    user: async () => {
-      return {userId: "wqdqwwd", name: "spock", city: sampleLocation, country: "CH"}
+    user: async (root, args, context) => {
+      return {id: args.id, name: "spock", city: sampleLocation, country: "CH"}
     }
   }
 });

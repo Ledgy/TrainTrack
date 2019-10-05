@@ -8,25 +8,16 @@ module.exports = gql`
   }
 
   type Trip {
-<<<<<<< HEAD
-    id: ID
-    userId: String
+    userId: ID
     origin: Location
     destination: Location
-    distance: Int
     date: Int
-=======
-    userId: ID
-    origin: LocationType
-    destination: LocationType
-    timestamp: String
     distance: Int
->>>>>>> use fixtures for sample query data
     roundtrip: Boolean
   }
 
   type UserProfile {
-    id: ID
+    userId: ID
     name: String
     city: Location
     country: String
@@ -34,7 +25,8 @@ module.exports = gql`
 
   type Query {
     hello: String
-    user(id: ID!): UserProfile
-    trip(id: ID!): Trip
+    user: UserProfile
+    trip: Trip
+    location: Location
   }
 `;

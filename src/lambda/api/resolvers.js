@@ -7,11 +7,11 @@ module.exports = db => ({
     hello: async (root, args, context) => {
       return "Hello, world!";
     },
-    trip: async (root, args, context) => {
-      return {...sampleTrips[0], userId: args.userId};
+    trips: async (root, args, context) => {
+      return sampleTrips.filter(v => v.userId === args.userId);
     },
     user: async (root, args, context) => {
-      return {...sampleUser[0], userId: args.userId};
+      return sampleUser.find(v => v.userId === args.userId)
     }
   }
 });

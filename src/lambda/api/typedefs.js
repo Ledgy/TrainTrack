@@ -26,6 +26,6 @@ module.exports = gql`
   type Query {
     hello: String
     user(userId: ID!): UserProfile
-    trip(userId: ID!): Trip
+    trips(userId: ID!): [Trip]
   }
 `;

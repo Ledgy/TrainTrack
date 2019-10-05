@@ -8,7 +8,7 @@ module.exports = db => ({
       return "Hello, world!";
     },
     trips: async (root, args, context) => {
-      return sampleTrips.filter(v => v.userId === args.userId);
+      return args.userId ? sampleTrips.filter(v => v.userId === args.userId) : sampleTrips;
     },
     user: async (root, args, context) => {
       return sampleUser.find(v => v.userId === args.userId)

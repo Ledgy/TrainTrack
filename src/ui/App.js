@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
 
-import logo from "./logo.svg";
-import "./App.css";
+import "./styles/App.css";
 
 const client = new ApolloClient({
   uri: "/.netlify/functions/graphql"
@@ -28,12 +27,8 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to TrainTrack</h1>
+          <h1 className="App-title">Welcome to Train Track</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
         <LambdaDemo />
       </div>
     );

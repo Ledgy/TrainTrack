@@ -7,14 +7,11 @@ module.exports = db => ({
     hello: async (root, args, context) => {
       return "Hello, world!";
     },
-    location: async (root, args, context) => {
-      return sampleTrips[0].origin;
-    },
     trip: async (root, args, context) => {
-      return sampleTrips[0];
+      return {...sampleTrips[0], userId: args.userId};
     },
     user: async (root, args, context) => {
-      return sampleUser[0];
+      return {...sampleUser[0], userId: args.userId};
     }
   }
 });

@@ -25,8 +25,7 @@ module.exports = gql`
 
   type Query {
     hello: String
-    user: UserProfile
-    trip: Trip
-    location: Location
+    user(userId: ID!): UserProfile
+    trip(userId: ID!): Trip
   }
 `;

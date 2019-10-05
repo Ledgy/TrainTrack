@@ -1,14 +1,15 @@
 const { gql } = require("apollo-server-lambda");
 
 module.exports = gql`
-  type Todo {
-    id: ID!
-    title: String!
-    completed: Boolean!
+
+  type LocationType {
+    latitude: Float
+    longtitude: Float
+    displayName: String
   }
 
   type Query {
     hello: String
-    allTodos: [Todo]
+    location: LocationType
   }
 `;

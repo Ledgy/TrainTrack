@@ -3,10 +3,8 @@ module.exports = db => ({
     hello: async (root, args, context) => {
       return "Hello, world!";
     },
-    allTodos: async () =>
-      await db
-        .collection("todos")
-        .find()
-        .toArray()
+    location: async () => {
+      return {latitude: 1, longtitude: 1, displayName: "test"};
+    }
   }
 });

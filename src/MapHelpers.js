@@ -393,11 +393,22 @@ export const addRoutesToMap = routes => {
       destination,
       ...routeOptions
     };
-    const directionsRenderer = new window.google.maps.DirectionsRenderer();
+    const directionsRenderer = new window.google.maps.DirectionsRenderer({
+      suppressMarkers: true,
+      suppressInfoWindows: true
+    });
     directionsRenderer.setMap(map);
     directionsService.route(request, (response, status) => {
       if (status === "OK") {
-        directionsRenderer.setDirections(response);
+        const path = response.routes[0].overview_path;
+        const line = new google.maps.Polyline({
+          path,
+          geodesic: true,
+          strokeColor: "#41ead4",
+          strokeOpacity: 0.7,
+          strokeWeight: 5
+        });
+        line.setMap(map);
       }
     });
   });
@@ -411,7 +422,7 @@ export const initializeMap = () => {
   }
   const mapOptions = {
     zoom: 4,
-    center: getGoogleLocationFromCoordinates(47.3768866, 8.541694),
+    center: getGoogleLocationFromCoordinates(47.3768866, 8.541694), // Zurich
     disableDefaultUI: true,
     styles: mapStyles
   };

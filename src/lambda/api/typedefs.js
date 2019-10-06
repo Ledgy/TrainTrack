@@ -24,6 +24,7 @@ module.exports = gql`
   }
 
   type Query {
+    reloadFixtures: String
     hello: String
     user(userId: ID!): UserProfile
     trips(userId: ID): [Trip]

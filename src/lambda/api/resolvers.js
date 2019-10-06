@@ -2,6 +2,9 @@ const sampleTrips = require("../../../fixtures/trips.json");
 
 module.exports = api => ({
   Query: {
+    reloadFixtures: async (root, args, context) => {
+      return await api.reloadFixtures()
+    },
     hello: async () => "Hello, world!",
     trips: async (root, args) =>
       args.userId

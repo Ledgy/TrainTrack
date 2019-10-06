@@ -13,8 +13,15 @@ const internalMongoApi = db => ({
       .find({}, { projection: { userId: 1, name: 1 } })
       .toArray();
   },
-  async getAllTrips() {},
-  async getUserTrips(userId) {},
+  async getAllTrips() {
+    return await db
+      .collection("trips")
+      .find({})
+      .toArray();
+  },
+  async getUserTrips(userId) {
+    return await db.collection("trips").findOne({ userId });
+  },
   async addTrip(trip) {},
   async reloadFixtures() {
     if (!db) return "db not available";

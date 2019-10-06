@@ -7,9 +7,8 @@ module.exports = api => ({
     },
     hello: async () => "Hello, world!",
     trips: async (root, args) =>
-      args.userId
-        ? sampleTrips.filter(v => v.userId === args.userId)
-        : sampleTrips,
+      args.userId ? api.getUserTrips(args.userId) : api.getAllTrips(),
+
     user: async (root, args) => api.getUser(args.userId),
     userNames: async () => {
       const names = await api.getUserNames();

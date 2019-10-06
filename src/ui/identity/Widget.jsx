@@ -7,6 +7,7 @@ const open = () => {
 };
 
 const updateToken = user => {
+  console.log({ user });
   if (user) localStorage.setItem("token", user.token.access_token);
 };
 

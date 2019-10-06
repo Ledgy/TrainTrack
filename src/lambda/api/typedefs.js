@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-lambda');
+const { gql } = require("apollo-server-lambda");
 
 module.exports = gql`
   type Location {

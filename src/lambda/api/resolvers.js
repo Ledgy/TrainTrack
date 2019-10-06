@@ -1,11 +1,14 @@
-const sampleTrips = require('../../../fixtures/trips.json');
+const sampleTrips = require("../../../fixtures/trips.json");
 
-module.exports = (api) => ({
+module.exports = api => ({
   Query: {
-    hello: async () => 'Hello, world!',
-    trips: async (root, args) => (args.userId ? sampleTrips.filter((v) => v.userId === args.userId)
-      : sampleTrips),
+    hello: async () => "Hello, world!",
+    trips: async (root, args) =>
+      args.userId
+        ? sampleTrips.filter(v => v.userId === args.userId)
+        : sampleTrips,
     user: async (root, args) => api.getUser(args.userId),
-    me: async (root, args, context) => (context.user ? context.user.user_metadata.full_name : ''),
-  },
+    me: async (root, args, context) =>
+      context.user ? context.user.user_metadata.full_name : ""
+  }
 });

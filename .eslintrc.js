@@ -5,6 +5,9 @@ module.exports = {
   },
   extends: [
     'airbnb',
+    "prettier",
+    "prettier/react",
+    "plugin:prettier/recommended"
   ],
   globals: {
     Atomics: 'readonly',
@@ -19,11 +22,13 @@ module.exports = {
   },
   plugins: [
     'react',
+    "prettier"
   ],
   rules: {
     "import/prefer-default-export": "off",
     "import/extensions": "off",
     "react/prop-types": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "prettier/prettier": "error"
   },
 };

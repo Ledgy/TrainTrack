@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const getStatistic = ({ title, value }) => (
   <div className="px-4">
@@ -10,31 +10,29 @@ const getStatistic = ({ title, value }) => (
 const statsData = [
   {
     title: "Total trips",
-    value: 47,
+    value: 47
   },
   {
     title: "Distance (km)",
-    value: "12‘301",
+    value: "12‘301"
   },
   {
     title: "C02 saved",
-    value: "37.3 tons",
+    value: "37.3 tons"
   },
   {
     title: "Money saved",
-    value: "CHF 23‘452",
-  },
+    value: "CHF 23‘452"
+  }
 ];
 
-export const Statistics = ({ name }) => {
+export const Statistics = () => {
   return (
     <section>
       <h1>Statistics</h1>
       <div className="d-inline-flex">
-        {statsData.map(stat => (
-          getStatistic({...stat})
-        ))}
+        {statsData.map(stat => getStatistic({ ...stat }))}
       </div>
     </section>
-  )
+  );
 };

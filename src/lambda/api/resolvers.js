@@ -1,4 +1,4 @@
-const sampleTrips = require("../../../fixtures/trips.json");
+const getDistance = require("./distanceApi");
 
 module.exports = api => ({
   Query: {
@@ -21,15 +21,32 @@ module.exports = api => ({
     leaderboard: async () => api.getLeaderboard()
   },
   Mutation: {
-    addTrip: (root, args, context) => {
+    addTrip: async (root, args, context) => {
       if (
         (!context.user_metadata && process.env.ENV !== "development") ||
         !args.trip
       ) {
         return;
       }
-      api.addTrip(args.trip);
-      return args.trip;
+      const userId =
+        (context.user_metadata && context.user_metadata.id) || "21";
+
+      const { origin, destination } = args.trip;
+      const distanceResult = await getDistance(
+        origin.displayName,
+        destination.displayName
+      );
+      const { distance, originName, destinationName } = distanceResult;
+      if (!distance) return;
+      const populatedTrip = {
+        ...args.trip,
+        userId,
+        distance,
+        origin: { ...origin, displayName: originName },
+        destination: { ...destination, displayName: destinationName }
+      };
+      api.addTrip(populatedTrip);
+      return populatedTrip;
     }
   }
 });

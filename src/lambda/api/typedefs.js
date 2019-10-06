@@ -13,7 +13,6 @@ module.exports = gql`
     destination: Location
     timestamp: Int
     distance: Int
-    roundtrip: Boolean
   }
 
   type UserProfile {
@@ -51,12 +50,9 @@ module.exports = gql`
   }
 
   input TripInput {
-    userId: ID
     origin: LocationInput
     destination: LocationInput
     timestamp: Int
-    distance: Int
-    roundtrip: Boolean
   }
 
   type Mutation {

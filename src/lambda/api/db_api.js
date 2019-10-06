@@ -31,7 +31,6 @@ const internalMongoApi = db => ({
       .toArray();
   },
   async addTrip(trip) {
-    console.log(trip);
     await db.collection("trips").insert(trip);
   },
   async reloadFixtures() {

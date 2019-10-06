@@ -16,7 +16,7 @@ export const Profile = ({ name, tripsData }) => (
         <Trips tripsData={tripsData} />
       </div>
       <div className="col col-sm-12 col-lg-6">
-        <Map />
+        <Map data={{ trips: tripsData }} />
       </div>
     </div>
   </div>

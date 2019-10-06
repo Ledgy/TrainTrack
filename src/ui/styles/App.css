@@ -275,6 +275,7 @@ input:focus {
 
 .autocomplete-wrapper {
   position: relative;
+  z-index: 100;
 }
 
 .autocomplete-dropdown-container {

@@ -186,6 +186,11 @@ button {
   margin: 1.5rem;
 }
 
+/* Profile */
+.profile .row {
+  margin: 32px -15px 0;
+}
+
 /* Statistics */
 .statistics-box {
   background-color: #fff;

@@ -62,12 +62,12 @@ export const App = () => (
           <img src={ttLogo} alt="Train Track Logo" className="logo" />
         </Link>
 
+        <Identity />
         <Link to="/profile">
           <p className="Header-link">Profile</p>
         </Link>
       </BrowserRouter>
     </header>
     <DataFetcher render={data => <FirstStageBooster data={data} />} />
-    <Identity />
   </div>
 );

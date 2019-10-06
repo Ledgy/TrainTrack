@@ -4,10 +4,10 @@ import { Statistics } from "../Components/Statistics.jsx";
 import { Trips } from "../Components/Trips.jsx";
 
 export const Profile = ({ name, tripsData }) => (
-  <div>
+  <div className="profile">
     <div className="row">
       <div className="col col-xs-12">
-        <Statistics />
+        <Statistics name={name} />
       </div>
     </div>
     <div className="row">

@@ -7,6 +7,9 @@ const internalMongoApi = db => ({
   async createLog(payload) {
     return await db.collection("logs").insert(payload);
   },
+  async createUser(payload) {
+    return await db.collection("users").insert(payload);
+  },
   async getUser(userId) {
     return await db.collection("users").findOne({ userId });
   },

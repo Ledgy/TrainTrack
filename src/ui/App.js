@@ -31,14 +31,7 @@ const DataFetcher = ({render}) => (
       }
       `}
     >
-      {({ data }) =>  {
-        return (
-          <div>
-            <div>Welcome {data && data.me ? data.me : ""}</div>
-            <div>Loaded {data && data.user ? data.user.name : ""}</div>
-          </div>
-        )
-      }}
+      {({ data }) => data ? render(data) : <div>Loading...</div>  }
     </Query>
   </ApolloProvider>
 );

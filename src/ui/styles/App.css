@@ -10,6 +10,29 @@ body {
   font-size: 16px;
 }
 
+:root {
+  --white: #fff;
+  --gray-100: #F6FAFF;
+  --gray-200: #EFF2FB;
+  --gray-300: #D9E2EC;
+  --gray-400: #BCCCDC;
+  --gray-500: #9FB3C8;
+  --gray-600: #829AB1;
+  --gray-700: #486581;
+  --gray-800: #334E68;
+  --gray-900: #243B53;
+
+  --green-100: #D9FDEB;
+  --green-200: #B3FCDF;
+  --green-300: #8CF8D6;
+  --green-400: #6FF2D5;
+  --green-500: #41EAD4;
+  --green-600: #2FC9C3;
+  --green-700: #20A1A8;
+  --green-800: #147687;
+  --green-900: #0C5870;
+}
+
 input {
   border-radius: 5px;
   padding: 5px;
@@ -23,8 +46,17 @@ input[type=date] {
   height: 15px;
 }
 
-input:focus {
+input:focus, button:focus {
   outline: none;
+}
+
+button {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--green-800);
+  color: var(--gray-100);
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .App {

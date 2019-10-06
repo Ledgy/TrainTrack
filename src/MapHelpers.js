@@ -337,7 +337,6 @@ export const getGoogleLocationFromCoordinates = (longitude, latitude) =>
   new window.google.maps.LatLng(longitude, latitude);
 
 export const addTripsToMap = trips => {
-  console.log(trips);
   if (!trips) return;
 
   const { map, google } = window;

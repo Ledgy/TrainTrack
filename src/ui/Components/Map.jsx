@@ -1,8 +1,13 @@
-import React from "react";
-import { addTripsToMap } from "../../MapHelpers";
+import React, { useEffect } from "react";
+import { addTripsToMap, initializeMap } from "../../MapHelpers";
 
 export const Map = ({ trips }) => {
-  addTripsToMap(trips);
+  useEffect(() => {
+    setTimeout(() => {
+      initializeMap();
+      addTripsToMap(trips);
+    }, 500);
+  }, []);
 
   return (
     <div

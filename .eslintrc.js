@@ -29,6 +29,7 @@ module.exports = {
     "import/extensions": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": "off",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react/jsx-props-no-spreading": "off"
   },
 };

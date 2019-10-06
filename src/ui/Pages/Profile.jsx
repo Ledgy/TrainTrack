@@ -3,11 +3,8 @@ import React from "react";
 import { Statistics } from "../Components/Statistics.jsx";
 import { Trips } from "../Components/Trips.jsx";
 
-export const Profile = ({ name }) => (
+export const Profile = () => (
   <div>
-    <div className="row">
-      <h1>{name}</h1>
-    </div>
     <div className="row">
       <div className="col col-xs-12">
         <Statistics />

@@ -1,6 +1,7 @@
 import React from "react";
 import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
+import { BrowserRouter, Link } from "react-router-dom";
 import { FirstStageBooster } from "./FirstStageBooster.jsx";
 
 import "./styles/App.css";
@@ -46,10 +47,15 @@ const DataFetcher = ({ render }) => (
 export const App = () => (
   <div className="App">
     <header className="App-header">
-      <img src={ttLogo} alt="Train Track Logo" className="logo" />
-      <a href="#" className="Header-link">
-        Home
-      </a>
+      <BrowserRouter>
+        <Link to="/">
+          <img src={ttLogo} alt="Train Track Logo" className="logo" />
+        </Link>
+
+        <Link to="/profile">
+          <p className="Header-link">Profile</p>
+        </Link>
+      </BrowserRouter>
     </header>
     <DataFetcher render={data => <FirstStageBooster data={data} />} />
     <Identity />

@@ -8,7 +8,8 @@ module.exports = api => ({
         ? sampleTrips.filter(v => v.userId === args.userId)
         : sampleTrips,
     user: async (root, args) => api.getUser(args.userId),
-    me: async (root, args, context) =>
-      context.user ? context.user.user_metadata.full_name : ""
+    me: async (root, args, context) => {
+      return context.user_metadata ? context.user_metadata.full_name : "";
+    }
   }
 });

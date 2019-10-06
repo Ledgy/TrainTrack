@@ -211,10 +211,12 @@ button {
 .trip-card {
   background-color: white;
   border-radius: 10px;
+  min-height: 400px;
+  margin-bottom: 32px;
 }
 
 .trip-icon {
-  height: 20px;
+  height: 16px;
 }
 
 .clearfix:before,

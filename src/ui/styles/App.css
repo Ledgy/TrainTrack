@@ -5,12 +5,6 @@ html {
   font-family: 'Inter', sans-serif;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-}
-
 :root {
   --white: #fff;
   --gray-100: #F6FAFF;
@@ -32,6 +26,13 @@ body {
   --green-700: #20A1A8;
   --green-800: #147687;
   --green-900: #0C5870;
+}
+
+body {
+  margin: 0;
+  padding: 20px 40px;
+  font-size: 16px;
+  background-color: var(--gray-200);
 }
 
 input {
@@ -185,6 +186,12 @@ color: #0c5870;
 
 .statistics-value {
   display: flex;
+}
+
+/* Trip list */
+.trip-card {
+  background-color: white;
+  border-radius: 10px;
 }
 
 .clearfix:before,

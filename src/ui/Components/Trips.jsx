@@ -40,7 +40,7 @@ const tripsData = [
 
 export const Trips = () => {
   return (
-    <section>
+    <section className="trip-card py-4 my-2">
       <h1>My trips</h1>
       <div>{tripsData.map((trip, i) => getTrip({ ...trip }, i))}</div>
     </section>

@@ -2,7 +2,7 @@ import React from 'react';
 import trainIcon from '../../static/trainIcon.png'
 
 const getStatisticsBox = ({ title, value, icon }) => (
-  <div className="px-4 statistics-box">
+  <div className="px-4 statistics-box" key={title}>
     <div className="statistics-value">
       <img src={icon} alt="Train Icon" />
       <h4 className="my-2">{value}</h4>

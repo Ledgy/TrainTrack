@@ -13,7 +13,6 @@
 # misc
 .DS_Store
 .netlify
-.envrc
 .envrc.production
 .env.local
 .env.development.local

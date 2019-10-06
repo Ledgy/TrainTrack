@@ -1,31 +1,31 @@
-@import url('https://rsms.me/inter/inter.css');
-@import '~bootstrap/dist/css/bootstrap-grid.min.css';
+@import url("https://rsms.me/inter/inter.css");
+@import "~bootstrap/dist/css/bootstrap-grid.min.css";
 
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 :root {
   --white: #fff;
-  --gray-100: #F6FAFF;
-  --gray-200: #EFF2FB;
-  --gray-300: #D9E2EC;
-  --gray-400: #BCCCDC;
-  --gray-500: #9FB3C8;
-  --gray-600: #829AB1;
+  --gray-100: #f6faff;
+  --gray-200: #eff2fb;
+  --gray-300: #d9e2ec;
+  --gray-400: #bcccdc;
+  --gray-500: #9fb3c8;
+  --gray-600: #829ab1;
   --gray-700: #486581;
-  --gray-800: #334E68;
-  --gray-900: #243B53;
+  --gray-800: #334e68;
+  --gray-900: #243b53;
 
-  --green-100: #D9FDEB;
-  --green-200: #B3FCDF;
-  --green-300: #8CF8D6;
-  --green-400: #6FF2D5;
-  --green-500: #41EAD4;
-  --green-600: #2FC9C3;
-  --green-700: #20A1A8;
+  --green-100: #d9fdeb;
+  --green-200: #b3fcdf;
+  --green-300: #8cf8d6;
+  --green-400: #6ff2d5;
+  --green-500: #41ead4;
+  --green-600: #2fc9c3;
+  --green-700: #20a1a8;
   --green-800: #147687;
-  --green-900: #0C5870;
+  --green-900: #0c5870;
 }
 
 body {
@@ -40,20 +40,21 @@ input {
   padding: 5px;
   margin: 5px;
   border: 1px solid gray;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
 }
 
-input[type=date] {
+input[type="date"] {
   height: 15px;
 }
 
-input:focus, button:focus {
+input:focus,
+button:focus {
   outline: none;
 }
 
 button {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: var(--green-800);
   color: var(--gray-100);
   border-radius: 5px;
@@ -66,10 +67,23 @@ button {
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  background-color: var(--white);
+  height: 64px;
+  padding: 0px 24px;
+  border-radius: 10px;
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 40px;
+}
+
+.Header-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .App-title {
@@ -175,13 +189,12 @@ button {
 /* Statistics */
 .statistics-box {
   background-color: #fff;
-border-radius: 10px;
-padding: 24px;
-color: #0c5870;
+  border-radius: 10px;
+  padding: 24px;
+  color: #0c5870;
 }
 
 .statistics-title {
-
 }
 
 .statistics-value {
@@ -213,11 +226,9 @@ color: #0c5870;
 }
 
 .autocomplete-dropdown-container {
-
 }
 
 .location-search-input {
-
 }
 
 .autocomplete-item {

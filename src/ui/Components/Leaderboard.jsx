@@ -21,12 +21,19 @@ export const Leaderboard = () => {
 
   const userNames = new Map(data.userNames.map(v => [v.userId, v.name]));
   return (
-    <ol>
-      {data.leaderboard.map(({ userId, distance }) => (
-        <li key={userId}>
-          <strong>{userNames.get(userId) || ""}</strong> {distance / 1000} km
-        </li>
-      ))}
-    </ol>
+    <div className="leaderboard p-4">
+      <h3 className="text-center pt-0">Leaderboard</h3>
+      <div className="leaderboard-entries">
+        {data.leaderboard.map(({ userId, distance }, i) => (
+          <div className="row" key={userId}>
+            <div className="col">{i + 1}.</div>
+            <div className="col">
+              <strong className="col">{userNames.get(userId) || ""}</strong>
+            </div>
+            <div className="col">{distance / 1000} km</div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };

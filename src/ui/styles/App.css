@@ -171,7 +171,8 @@ button {
   margin: 1.5rem;
 }
 
-.profile .row {
+.profile .row,
+.home .row {
   margin: 32px -15px 0;
 }
 
@@ -192,15 +193,20 @@ button {
   height: 100% !important;
 }
 
+/* Leaderboard */
+.leaderboard {
+  text-align: left;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 32px;
+}
+
 /* Statistics */
 .statistics-box {
   background-color: #fff;
   border-radius: 10px;
   padding: 24px;
   color: #0c5870;
-}
-
-.statistics-title {
 }
 
 .statistics-value {

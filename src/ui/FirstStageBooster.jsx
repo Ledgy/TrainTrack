@@ -11,7 +11,7 @@ export const FirstStageBooster = ({ data }) => (
         <Profile name="T‘Pol" tripsData={data.trips} />
       </Route>
       <Route path="/">
-        <Home />
+        <Home data={data} />
       </Route>
     </Switch>
   </div>

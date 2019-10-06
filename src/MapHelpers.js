@@ -336,57 +336,25 @@ export const mapStyles = [
 export const getGoogleLocationFromCoordinates = (longitude, latitude) =>
   new window.google.maps.LatLng(longitude, latitude);
 
-export const addRoutesToMap = routes => {
-  const exampleRoutes = [
-    {
-      userId: "10",
-      origin: {
-        displayName: "Zürich, Switzerland",
-        latitude: 47.3768866,
-        longitude: 8.541694
-      },
-      destination: {
-        displayName: "Athens, Greece",
-        latitude: 37.9838096,
-        longitude: 23.7275388
-      },
-      distance: 2414728,
-      timestamp: 1571668813,
-      roundtrip: false
-    },
-    {
-      userId: "10",
-      origin: {
-        displayName: "Nice, France",
-        latitude: 43.7102,
-        longitude: 7.262
-      },
-      destination: {
-        displayName: "Marseilles, France",
-        latitude: 43.2965,
-        longitude: 5.3698
-      },
-      timestamp: 1569916813,
-      distance: 223885,
-      roundtrip: true
-    }
-  ];
+export const addTripsToMap = trips => {
+  console.log(trips);
+  if (!trips) return;
 
   const { map, google } = window;
   if (!map || !google) {
-    setTimeout(() => addRoutesToMap(routes), 500);
+    setTimeout(() => addTripsToMap(trips), 500);
     return;
   }
   const directionsService = new window.google.maps.DirectionsService();
 
-  (routes || exampleRoutes).forEach(route => {
+  trips.forEach(trip => {
     const origin = getGoogleLocationFromCoordinates(
-      route.origin.latitude,
-      route.origin.longitude
+      trip.origin.latitude,
+      trip.origin.longitude
     );
     const destination = getGoogleLocationFromCoordinates(
-      route.destination.latitude,
-      route.destination.longitude
+      trip.destination.latitude,
+      trip.destination.longitude
     );
     const request = {
       origin,

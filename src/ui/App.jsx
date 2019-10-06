@@ -37,9 +37,13 @@ const DataFetcher = ({ render }) => (
           trips(userId: "10") {
             origin {
               displayName
+              latitude
+              longitude
             }
             destination {
               displayName
+              latitude
+              longitude
             }
             timestamp
             distance

@@ -38,7 +38,7 @@ module.exports = gql`
     hello: String
     user(userId: ID!): UserProfile
     userNames: [UserName]
-    trips(userId: ID): [Trip]
+    myTrips: [Trip]
     me: String
     leaderboard: [LeaderboardEntry]
   }

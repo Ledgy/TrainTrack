@@ -34,7 +34,7 @@ const DataFetcher = ({ render }) => (
             name
           }
           me
-          trips(userId: "10") {
+          myTrips {
             origin {
               displayName
               latitude

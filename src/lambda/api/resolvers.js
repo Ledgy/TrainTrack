@@ -6,9 +6,9 @@ module.exports = api => ({
       return api.reloadFixtures();
     },
     hello: async () => "Hello, world!",
-    trips: async (root, args) =>
-      args.userId ? api.getUserTrips(args.userId) : api.getAllTrips(),
-
+    myTrips: async (root, args, context) => {
+      return context.user ? api.getUserTrips(context.user.sub) : [];
+    },
     user: async (root, args) => api.getUser(args.userId),
     userNames: async () => {
       const names = await api.getUserNames();

@@ -1,9 +1,10 @@
-const { ApolloServer } = require("apollo-server-lambda");
-const typeDefs = require("./api/typedefs");
-const resolvers = require("./api/resolvers");
-const initDbApi = require("./api/db_api");
+const { ApolloServer } = require('apollo-server-lambda');
+const typeDefs = require('./api/typedefs');
+const resolvers = require('./api/resolvers');
+const initDbApi = require('./api/db_api');
 
-exports.handler = async function(event, context) {
+// eslint-disable-next-line func-names
+exports.handler = async function (event, context) {
   const user = context.clientContext && context.clientContext.user;
   const api = await initDbApi();
 

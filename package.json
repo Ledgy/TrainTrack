@@ -29,8 +29,14 @@
   },
   "devDependencies": {
     "apollo": "^2.19.0",
-    "start-server-and-test": "^1.10.4",
-    "netlify-lambda": "^1.6.3"
+    "eslint": "6.5.1",
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.16.0",
+    "eslint-plugin-react-hooks": "1.7.0",
+    "netlify-lambda": "^1.6.3",
+    "start-server-and-test": "^1.10.4"
   },
   "browserslist": {
     "production": [

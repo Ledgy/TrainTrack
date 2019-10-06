@@ -5,4 +5,4 @@ export const Home = () => (
   <div>
     <MapForm />
   </div>
-)
+);

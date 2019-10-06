@@ -25,6 +25,14 @@ To run mongodb started at login:
 brew services start mongodb/brew/mongodb-community@4.0
 ```
 
+#### Environment
+
+We use [direnv] to autoload exported secrets from `.envrc` file, each time you enter in this project's folder.
+
+Run `direnv allow` after each time secrets are changed in `.envrc` (development secrets only).
+
+[direnv]: https://direnv.net/
+
 ## Babel/webpack compilation
 
 All functions are compiled with webpack using the Babel Loader, so you can use modern JavaScript, import npm modules, etc., without any extra setup.

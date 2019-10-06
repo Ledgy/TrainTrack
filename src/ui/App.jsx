@@ -26,6 +26,10 @@ const DataFetcher = ({ render }) => (
           user(userId: 10) {
             name
           }
+          userNames {
+            userId
+            name
+          }
           me
         }
       `}

@@ -23,10 +23,16 @@ module.exports = gql`
     country: String
   }
 
+  type UserName {
+    userId: ID
+    name: String
+  }
+
   type Query {
     reloadFixtures: String
     hello: String
     user(userId: ID!): UserProfile
+    userNames: [UserName]
     trips(userId: ID): [Trip]
     me: String
   }

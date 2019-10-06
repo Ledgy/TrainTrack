@@ -333,7 +333,7 @@ export const mapStyles = [
   }
 ];
 
-export const getGoogleLocationFromCoordinates = (longitude, latitude) =>
+const getGoogleLocationFromCoordinates = (longitude, latitude) =>
   new window.google.maps.LatLng(longitude, latitude);
 
 export const addTripsToMap = trips => {

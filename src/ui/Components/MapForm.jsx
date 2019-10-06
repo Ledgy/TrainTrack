@@ -4,6 +4,8 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 
+import { addTripsToMap } from "../../MapHelpers";
+
 import { Row, Col } from "./Utilities.jsx";
 
 const emptyState = { displayName: "", latitude: 0, longitude: 0 };
@@ -23,8 +25,7 @@ const AutocompletePlaceField = ({ place, setPlace, placeholder }) => {
         setPlace(prev => ({ ...prev, displayName: e }));
       }}
       onSelect={e => handleSelect(e)}
-      debounce={1000}
-      shouldFetchSuggestions={place.displayName.length > 3}
+      debounce={500}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className="autocomplete-wrapper">
@@ -54,7 +55,17 @@ export const MapForm = () => {
   const [origin, setOrigin] = useState(emptyState);
   const [destination, setDestination] = useState(emptyState);
   const [date, setDate] = useState("");
-
+  if (origin.latitude && destination.latitude) {
+    addTripsToMap([
+      {
+        origin: { latitude: origin.latitude, longitude: origin.longitude },
+        destination: {
+          latitude: destination.latitude,
+          longitude: destination.longitude
+        }
+      }
+    ]);
+  }
   return (
     <form
       className="form-layout"

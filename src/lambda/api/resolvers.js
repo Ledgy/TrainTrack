@@ -6,6 +6,7 @@ module.exports = api => ({
       return api.reloadFixtures();
     },
     hello: async () => "Hello, world!",
+    lastTrips: () => api.getLastTrips(),
     myTrips: async (root, args, context) => {
       return context.user ? api.getUserTrips(context.user.sub) : [];
     },

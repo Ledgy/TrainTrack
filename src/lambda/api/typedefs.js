@@ -38,6 +38,7 @@ module.exports = gql`
     hello: String
     user(userId: ID!): UserProfile
     userNames: [UserName]
+    lastTrips: [Trip]
     myTrips: [Trip]
     me: String
     leaderboard: [LeaderboardEntry]

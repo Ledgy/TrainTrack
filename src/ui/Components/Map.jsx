@@ -1,8 +1,8 @@
 import React from "react";
 import { addTripsToMap } from "../../MapHelpers";
 
-export const Map = ({ data }) => {
-  addTripsToMap(data.trips);
+export const Map = ({ trips }) => {
+  addTripsToMap(trips);
 
   return (
     <div

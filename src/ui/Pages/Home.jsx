@@ -15,7 +15,7 @@ export const Home = ({ data }) => (
         <Leaderboard data={data} />
       </div>
       <div className="col col-12 col-lg-8">
-        <Map data={data} />
+        <Map trips={data.lastTrips} />
       </div>
     </div>
   </div>

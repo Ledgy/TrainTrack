@@ -8,7 +8,7 @@ export const FirstStageBooster = ({ data }) => (
   <div test={console.log(data)}>
     <Switch>
       <Route path="/profile">
-        <Profile name="T‘Pol" tripsData={data.trips} />
+        <Profile name="T‘Pol" tripsData={data.myTrips} />
       </Route>
       <Route path="/">
         <Home data={data} />

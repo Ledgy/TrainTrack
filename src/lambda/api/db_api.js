@@ -19,12 +19,11 @@ const internalMongoApi = db => ({
       .find({}, { projection: { userId: 1, name: 1 } })
       .toArray();
   },
-  async getAllTrips() {
-    return await db
+  getLastTrips: () =>
+    db
       .collection("trips")
-      .find({})
-      .toArray();
-  },
+      .find()
+      .toArray(),
   async getUserTrips(userId) {
     return await db
       .collection("trips")

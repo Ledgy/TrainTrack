@@ -1,29 +1,37 @@
-import React from "react";
+import React from 'react';
+import trainIcon from '../../static/trainIcon.png'
 
-const getStatistic = ({ title, value }) => (
-  <div className="px-4">
-    <h4 className="my-2">{value}</h4>
-    <div>{title}</div>
+const getStatisticsBox = ({ title, value, icon }) => (
+  <div className="px-4 statistics-box">
+    <div className="statistics-value">
+      <img src={icon} alt="Train Icon" />
+      <h4 className="my-2">{value}</h4>
+    </div>
+    <div className="statistics-title">{title}</div>
   </div>
 );
 
 const statsData = [
   {
     title: "Total trips",
-    value: 47
+    value: 47,
+    icon: trainIcon
   },
   {
     title: "Distance (km)",
-    value: "12‘301"
+    value: "12‘301",
+    icon: trainIcon
   },
   {
     title: "C02 saved",
-    value: "37.3 tons"
+    value: "37.3 tons",
+    icon: trainIcon
   },
   {
     title: "Money saved",
-    value: "CHF 23‘452"
-  }
+    value: "CHF 23‘452",
+    icon: trainIcon
+  },
 ];
 
 export const Statistics = () => {
@@ -31,8 +39,11 @@ export const Statistics = () => {
     <section>
       <h1>Statistics</h1>
       <div className="d-inline-flex">
-        {statsData.map(stat => getStatistic({ ...stat }))}
+        {statsData.map(stat => (
+          getStatisticsBox({...stat})
+        ))}
       </div>
     </section>
   );
 };
+

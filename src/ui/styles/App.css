@@ -170,6 +170,21 @@ button {
   margin: 1.5rem;
 }
 
+/* Statistics */
+.statistics-box {
+  background-color: #fff;
+border-radius: 10px;
+padding: 24px;
+color: #0c5870;
+}
+
+.statistics-title {
+
+}
+
+.statistics-value {
+  display: flex;
+}
 /* Lightweight grid system */
 .row {
   margin-right: -15px;

@@ -55,9 +55,9 @@ const DataFetcher = ({ render }) => (
 );
 
 export const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <BrowserRouter>
+  <BrowserRouter>
+    <div className="App">
+      <header className="App-header">
         <Link to="/">
           <img src={ttLogo} alt="Train Track Logo" className="logo" />
         </Link>
@@ -66,8 +66,8 @@ export const App = () => (
         <Link to="/profile">
           <p className="Header-link">Profile</p>
         </Link>
-      </BrowserRouter>
-    </header>
-    <DataFetcher render={data => <FirstStageBooster data={data} />} />
-  </div>
+      </header>
+      <DataFetcher render={data => <FirstStageBooster data={data} />} />
+    </div>
+  </BrowserRouter>
 );

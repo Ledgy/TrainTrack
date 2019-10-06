@@ -851,3 +851,19 @@ color: #0c5870;
 .row:after {
   clear: both;
 }
+
+.autocomplete-dropdown-container {
+
+}
+
+.location-search-input {
+
+}
+
+.autocomplete-item {
+  font-size: 20px;
+}
+
+.autocomplete-item--active {
+  background-color: gray;
+}

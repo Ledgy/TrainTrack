@@ -1,44 +1,17 @@
 import React from "react";
 import trainIcon from "../../static/trainIcon.png";
 
-const getTrip = ({ origin, destination, date, distance }, i) => (
+const getTrip = ({ origin, destination, timestamp, distance }, i) => (
   <div className="px-4 d-inline-flex trip-box" key={i}>
-    <p className="px-2">{origin}</p>
-    <img src={trainIcon} alt="Train Icon" className="trip-icon my-auto" />
-    <p className="px-2">{destination}</p>
-    <p className="px-2">{date}</p>
-    <p className="px-2">{distance}</p>
+    <p className="px-2">{origin.displayName.slice(0, 20)}</p>
+    <img src={trainIcon} alt="Train Icon" className="trip-icon my-auto"/>
+    <p className="px-2">{destination.displayName.slice(0, 20)}</p>
+    <p className="px-2">{new Date(timestamp).toLocaleDateString()}</p>
+    <p className="px-2">{`${Math.round(distance / 1000)} km`}</p>
   </div>
 );
 
-const tripsData = [
-  {
-    origin: "Nice, France",
-    destination: "Barcelona, Spain",
-    date: "28.05.2019",
-    distance: "1'254 km"
-  },
-  {
-    origin: "Nice, France",
-    destination: "Barcelona, Spain",
-    date: "28.05.2019",
-    distance: "1'254 km"
-  },
-  {
-    origin: "Nice, France",
-    destination: "Barcelona, Spain",
-    date: "28.05.2019",
-    distance: "1'254 km"
-  },
-  {
-    origin: "Nice, France",
-    destination: "Barcelona, Spain",
-    date: "28.05.2019",
-    distance: "1'254 km"
-  }
-];
-
-export const Trips = () => {
+export const Trips = ({ tripsData }) => {
   return (
     <div className="trip-card py-4 my-2">
       <h1>My trips</h1>

@@ -34,11 +34,21 @@ const DataFetcher = ({ render }) => (
             name
           }
           me
+          trips {
+            origin {
+              displayName
+            }
+            destination {
+              displayName
+            }
+            timestamp
+            distance
+          }
         }
       `}
     >
       {({ data }) =>
-        data && data.user ? render(data.user) : <div>Loading ...</div>
+        data && data.user ? render(data) : <div>Loading ...</div>
       }
     </Query>
   </ApolloProvider>

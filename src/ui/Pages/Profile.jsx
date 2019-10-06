@@ -3,7 +3,7 @@ import React from "react";
 import { Statistics } from "../Components/Statistics.jsx";
 import { Trips } from "../Components/Trips.jsx";
 
-export const Profile = () => (
+export const Profile = ({ name, tripsData }) => (
   <div>
     <div className="row">
       <div className="col col-xs-12">
@@ -12,7 +12,7 @@ export const Profile = () => (
     </div>
     <div className="row">
       <div className="col col-sm-12 col-lg-6">
-        <Trips />
+        <Trips tripsData={tripsData} />
       </div>
       <div className="col col-sm-12 col-lg-6">
         <h3>Map</h3>

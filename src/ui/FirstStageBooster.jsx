@@ -5,11 +5,11 @@ import { Home } from "./Pages/Home.jsx";
 import { Profile } from "./Pages/Profile.jsx";
 
 export const FirstStageBooster = ({ data }) => (
-  <div test={console.log(data)}>
+  <div test={console.log(data.trips)}>
     <BrowserRouter>
       <Switch>
         <Route path="/profile">
-          <Profile />
+          <Profile name="T‘Pol" tripsData={data.trips} />
         </Route>
         <Route path="/">
           <Home />

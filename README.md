@@ -54,6 +54,7 @@ npm install
 
 To start your app server, run:
 ```
+export REACT_APP_MAPS_KEY=662607015
 netlify dev
 ```
 

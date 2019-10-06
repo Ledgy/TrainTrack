@@ -6,6 +6,8 @@ import PlacesAutocomplete, {
 
 import { Row, Col } from "./Utilities.jsx";
 
+const emptyState = { displayName: "", latitude: 0, longitude: 0 };
+
 const AutocompletePlaceField = ({ place, setPlace, placeholder }) => {
   const handleSelect = async address => {
     const [result] = await geocodeByAddress(address);
@@ -16,8 +18,13 @@ const AutocompletePlaceField = ({ place, setPlace, placeholder }) => {
   return (
     <PlacesAutocomplete
       value={place.displayName}
-      onChange={e => setPlace(prev => ({ ...prev, displayName: e }))}
+      onChange={e => {
+        if (!e) setPlace(emptyState);
+        setPlace(prev => ({ ...prev, displayName: e }));
+      }}
       onSelect={e => handleSelect(e)}
+      debounce={1000}
+      shouldFetchSuggestions={place.displayName.length > 3}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className="autocomplete-wrapper">
@@ -44,11 +51,10 @@ const AutocompletePlaceField = ({ place, setPlace, placeholder }) => {
 const colClass = "col-md-3 d-flex flex-column align-items-start my-2";
 
 export const MapForm = () => {
-  const emptyState = { displayName: "", latitude: 0, longitude: 0 };
   const [origin, setOrigin] = useState(emptyState);
   const [destination, setDestination] = useState(emptyState);
   const [date, setDate] = useState("");
-
+  console.log(origin, destination, date);
   return (
     <form
       className="container form-layout"

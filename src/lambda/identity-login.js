@@ -7,8 +7,7 @@ export async function handler(event, context, callback) {
   console.log(`name:  ${body.user.user_metadata.name}`);
 
   // TODO: upsert new user
-
-  console.log('upsert new user', { body, api: !!api });
+  api.createLog({ message: 'upsert new user', body, context });
 
   callback(null, {
     statusCode: 200,

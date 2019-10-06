@@ -4,6 +4,9 @@ const sampleUsers = require("../../../fixtures/users.json");
 const _ = require("./db_helpers");
 
 const internalMongoApi = db => ({
+  async createLog(payload) {
+    return await db.collection("logs").insert(payload);
+  },
   async getUser(userId) {
     return await db.collection("users").findOne({ userId });
   },

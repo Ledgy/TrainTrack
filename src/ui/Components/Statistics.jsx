@@ -1,5 +1,5 @@
-import React from 'react';
-import trainIcon from '../../static/trainIcon.png'
+import React from "react";
+import trainIcon from "../../static/trainIcon.png";
 
 const getStatisticsBox = ({ title, value, icon }) => (
   <div className="px-4 statistics-box" key={title}>
@@ -31,19 +31,13 @@ const statsData = [
     title: "Money saved",
     value: "CHF 23‘452",
     icon: trainIcon
-  },
+  }
 ];
 
 export const Statistics = () => {
   return (
-    <section>
-      <h1>Statistics</h1>
-      <div className="d-inline-flex">
-        {statsData.map(stat => (
-          getStatisticsBox({...stat})
-        ))}
-      </div>
-    </section>
+    <div className="d-inline-flex">
+      {statsData.map(stat => getStatisticsBox({ ...stat }))}
+    </div>
   );
 };
-

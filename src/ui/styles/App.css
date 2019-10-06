@@ -194,6 +194,10 @@ color: #0c5870;
   border-radius: 10px;
 }
 
+.trip-icon {
+  height: 20px;
+}
+
 .clearfix:before,
 .clearfix:after,
 .container:before,

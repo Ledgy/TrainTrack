@@ -1,15 +1,25 @@
-import React from 'react';
+import React from "react";
 
-import { Statistics } from '../Components/Statistics.jsx'
-import { Trips } from '../Components/Trips.jsx'
+import { Statistics } from "../Components/Statistics.jsx";
+import { Trips } from "../Components/Trips.jsx";
 
-export const Profile = ({name}) => (
+export const Profile = ({ name }) => (
   <div>
-    <section>
+    <div className="row">
       <h1>{name}</h1>
-      <Statistics />
-      <Trips />
-      <h3>Map</h3>
-    </section>
+    </div>
+    <div className="row">
+      <div className="col col-xs-12">
+        <Statistics />
+      </div>
+    </div>
+    <div className="row">
+      <div className="col col-xs-12 col-md-6">
+        <Trips />
+      </div>
+      <div className="col col-xs-12 col-md-6">
+        <h3>Map</h3>
+      </div>
+    </div>
   </div>
 );

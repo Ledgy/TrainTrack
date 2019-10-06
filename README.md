@@ -33,7 +33,9 @@ All functions are compiled with webpack using the Babel Loader, so you can use m
 ## Local Development
 
 Before developing, clone the repository:
-```git clone https://github.com/Ledgy/TrainTrack```
+```
+git clone https://github.com/Ledgy/TrainTrack
+```
 
 Navigate into the newly created TrainTrack directory, and run:
 ```
@@ -84,3 +86,14 @@ yarn start
 This will start the normal create-react-app dev server and open your app at `http://localhost:3000`.
 
 Local in-app requests to the relative path `/.netlify/functions/*` will automatically be proxied to the local functions dev server.
+
+### Test function individually
+
+Make sure, that all required servers are running as outlined above. To test the
+login callback you can then run the following. Please note, that `netlify` does
+not fully mock the user metadata yet.
+
+```
+netlify functions:invoke --name identity-login --identity
+```
+

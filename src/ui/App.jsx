@@ -6,6 +6,8 @@ import { FirstStageBooster } from "./FirstStageBooster.jsx";
 import "./styles/App.css";
 import { Identity } from "./identity/Widget.jsx";
 
+import ttLogo from "../static/ttLogo.png";
+
 const client = new ApolloClient({
   uri: "/.netlify/functions/graphql",
   request: operation => {
@@ -44,7 +46,10 @@ const DataFetcher = ({ render }) => (
 export const App = () => (
   <div className="App">
     <header className="App-header">
-      <h1 className="App-title">Welcome to Train Track</h1>
+      <img src={ttLogo} alt="Train Track Logo" className="logo" />
+      <a href="#" className="Header-link">
+        Home
+      </a>
     </header>
     <DataFetcher render={data => <FirstStageBooster data={data} />} />
     <Identity />

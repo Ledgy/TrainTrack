@@ -11,10 +11,10 @@ export const Home = ({ data }) => (
       </div>
     </div>
     <div className="row">
-      <div className="col col-sm-12 col-lg-4">
+      <div className="col col-12 col-lg-4">
         <Leaderboard data={data} />
       </div>
-      <div className="col col-sm-12 col-lg-8">
+      <div className="col col-12 col-lg-8">
         <Map data={data} />
       </div>
     </div>

@@ -38,6 +38,12 @@ body {
   background-color: var(--gray-200);
 }
 
+@media only screen and (max-width: 580px) {
+  body {
+    padding: 12px;
+  }
+}
+
 input:focus, button:focus {
   outline: none;
 }
@@ -199,6 +205,17 @@ button {
   background-color: white;
   border-radius: 10px;
   margin-bottom: 32px;
+  color: var(--gray-900);
+}
+
+.leaderboard h3 {
+  color: var(--green-800);
+}
+
+@media (max-width: 580px) {
+  .leaderboard-entries .col {
+    padding: 0;
+  }
 }
 
 /* Statistics */

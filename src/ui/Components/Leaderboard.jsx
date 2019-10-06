@@ -27,11 +27,11 @@ export const Leaderboard = () => {
       <div className="leaderboard-entries">
         {data.leaderboard.map(({ userId, distance }, i) => (
           <div className="row" key={userId}>
-            <div className="col">{i + 1}.</div>
-            <div className="col">
+            <div className="col col-1">{i + 1}.</div>
+            <div className="col col-7">
               <strong className="col">{userNames.get(userId) || ""}</strong>
             </div>
-            <div className="col">{formatDistance(distance)}</div>
+            <div className="col col-4">{formatDistance(distance)}</div>
           </div>
         ))}
       </div>

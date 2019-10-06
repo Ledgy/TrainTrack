@@ -5,7 +5,7 @@ const _ = require('./db_helpers');
 
 const internalMongoApi = db => ({
   async getUser(userId) {
-    return sampleUsers.find(v => v.userId === userId);
+    return await db.collection('users').findOne({ userId });
   },
   async getUserNames(userIds) {},
   async getAllTrips() {},

@@ -16,7 +16,6 @@ exports.handler = async function(event, context) {
     playground: isDevelopment,
     introspection: isDevelopment
   });
-  console.log({ server });
   return new Promise((yay, nay) => {
     const cb = (err, args) => (err ? nay(err) : yay(args));
     const handler = server.createHandler();

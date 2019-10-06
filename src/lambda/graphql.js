@@ -1,15 +1,15 @@
 const { ApolloServer } = require("apollo-server-lambda");
 const typeDefs = require("./api/typedefs");
 const resolvers = require("./api/resolvers");
-const connectToMongoDB = require("./api/db");
+const initDbApi = require("./api/db_api");
 
 exports.handler = async function(event, context) {
   const user = context.clientContext && context.clientContext.user;
-  // const db = await connectToMongoDB();
-  const db = null;
+  const api = await initDbApi();
+
   const server = new ApolloServer({
     typeDefs,
-    resolvers: resolvers(db),
+    resolvers: resolvers(api),
     context: () => ({ user }),
   });
   return new Promise((yay, nay) => {

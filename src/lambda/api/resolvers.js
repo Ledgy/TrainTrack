@@ -18,5 +18,17 @@ module.exports = api => ({
       return context.user_metadata ? context.user_metadata.full_name : "";
     },
     leaderboard: async () => api.getLeaderboard()
+  },
+  Mutation: {
+    addTrip: (root, args, context) => {
+      if (
+        (!context.user_metadata && process.env.ENV !== "development") ||
+        !args.trip
+      ) {
+        return;
+      }
+      api.addTrip(args.trip);
+      return args.trip;
+    }
   }
 });

@@ -28,7 +28,10 @@ const internalMongoApi = db => ({
   async getUserTrips(userId) {
     return await db.collection("trips").findOne({ userId });
   },
-  async addTrip(trip) {},
+  async addTrip(trip) {
+    console.log(trip);
+    await db.collection("trips").insert(trip);
+  },
   async reloadFixtures() {
     if (!db) return "db not available";
     _.FIXTURES.forEach(([name, sampleData]) => {

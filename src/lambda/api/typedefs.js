@@ -3,7 +3,7 @@ const { gql } = require("apollo-server-lambda");
 module.exports = gql`
   type Location {
     latitude: Float
-    longtitude: Float
+    longitude: Float
     displayName: String
   }
 
@@ -11,7 +11,7 @@ module.exports = gql`
     userId: ID
     origin: Location
     destination: Location
-    date: Int
+    timestamp: Int
     distance: Int
     roundtrip: Boolean
   }
@@ -41,5 +41,24 @@ module.exports = gql`
     trips(userId: ID): [Trip]
     me: String
     leaderboard: [LeaderboardEntry]
+  }
+
+  input LocationInput {
+    latitude: Float
+    longitude: Float
+    displayName: String
+  }
+
+  input TripInput {
+    userId: ID
+    origin: LocationInput
+    destination: LocationInput
+    timestamp: Int
+    distance: Int
+    roundtrip: Boolean
+  }
+
+  type Mutation {
+    addTrip(trip: TripInput!): Trip
   }
 `;

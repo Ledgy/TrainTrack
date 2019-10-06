@@ -34,7 +34,7 @@ const DataFetcher = ({ render }) => (
             name
           }
           me
-          trips {
+          trips(userId: "10") {
             origin {
               displayName
             }

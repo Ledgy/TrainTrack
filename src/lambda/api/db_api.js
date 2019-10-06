@@ -26,7 +26,10 @@ const internalMongoApi = db => ({
       .toArray();
   },
   async getUserTrips(userId) {
-    return await db.collection("trips").findOne({ userId });
+    return await db
+      .collection("trips")
+      .find({ userId })
+      .toArray();
   },
   async addTrip(trip) {
     console.log(trip);

@@ -32,7 +32,16 @@ const internalMongoApi = db => ({
       _.resetCollection(db, name, sampleData);
     });
     return "done";
-  }
+  },
+  getLeaderboard: async () =>
+    db
+      .collection("trips")
+      .aggregate([
+        { $group: { _id: "$userId", distance: { $sum: "$distance" } } },
+        { $sort: { distance: -1 } },
+        { $project: { _id: 0, userId: "$_id", distance: 1 } }
+      ])
+      .toArray()
 });
 
 module.exports = async () => {

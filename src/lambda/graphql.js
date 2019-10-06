@@ -2,6 +2,7 @@ const { ApolloServer } = require("apollo-server-lambda");
 const typeDefs = require("./api/typedefs");
 const resolvers = require("./api/resolvers");
 const initDbApi = require("./api/db_api");
+
 const isDevelopment = process.env.ENV === "development";
 
 // eslint-disable-next-line func-names

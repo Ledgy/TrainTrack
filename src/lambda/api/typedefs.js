@@ -28,6 +28,11 @@ module.exports = gql`
     name: String
   }
 
+  type LeaderboardEntry {
+    userId: ID
+    distance: Int
+  }
+
   type Query {
     reloadFixtures: String
     hello: String
@@ -35,5 +40,6 @@ module.exports = gql`
     userNames: [UserName]
     trips(userId: ID): [Trip]
     me: String
+    leaderboard: [LeaderboardEntry]
   }
 `;

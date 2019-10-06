@@ -16,6 +16,7 @@ module.exports = api => ({
     },
     me: async (root, args, context) => {
       return context.user_metadata ? context.user_metadata.full_name : "";
-    }
+    },
+    leaderboard: async () => api.getLeaderboard()
   }
 });

@@ -1,5 +1,6 @@
 import React from "react";
 import trainIcon from "../../static/trainIcon.png";
+import { formatDistance } from "../format";
 
 const getTrip = ({ origin, destination, timestamp, distance }, i) => (
   <div className="px-4 d-inline-flex trip-box" key={i}>
@@ -7,7 +8,7 @@ const getTrip = ({ origin, destination, timestamp, distance }, i) => (
     <img src={trainIcon} alt="Train Icon" className="trip-icon my-auto" />
     <p className="px-2">{destination.displayName.slice(0, 20)}</p>
     <p className="px-2">{new Date(timestamp).toLocaleDateString()}</p>
-    <p className="px-2">{`${Math.round(distance / 1000)} km`}</p>
+    <p className="px-2">{formatDistance(distance)}</p>
   </div>
 );
 

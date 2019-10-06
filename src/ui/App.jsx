@@ -33,6 +33,10 @@ const DataFetcher = ({ render }) => (
             userId
             name
           }
+          statistics {
+            trips
+            distance
+          }
           me
           lastTrips {
             origin {

@@ -1,5 +1,6 @@
 import React from "react";
 import trainIcon from "../../static/trainIcon.png";
+import { formatDistance, formatCo2, formatMoneySaved } from "../format";
 
 const getStatisticsBox = ({ title, value, icon }) => (
   <div className="px-4 statistics-box" key={title}>
@@ -11,33 +12,33 @@ const getStatisticsBox = ({ title, value, icon }) => (
   </div>
 );
 
-const statsData = [
+const getStats = (trips, distance) => [
   {
     title: "Total trips",
-    value: 47,
+    value: trips,
     icon: trainIcon
   },
   {
-    title: "Distance (km)",
-    value: "12‘301",
+    title: "Distance",
+    value: formatDistance(distance),
     icon: trainIcon
   },
   {
     title: "C02 saved",
-    value: "37.3 tons",
+    value: formatCo2(distance),
     icon: trainIcon
   },
   {
     title: "Money saved",
-    value: "CHF 23‘452",
+    value: formatMoneySaved(distance),
     icon: trainIcon
   }
 ];
 
-export const Statistics = () => {
+export const Statistics = ({ trips, distance }) => {
   return (
     <div className="d-inline-flex">
-      {statsData.map(stat => getStatisticsBox({ ...stat }))}
+      {getStats(trips, distance).map(stat => getStatisticsBox({ ...stat }))}
     </div>
   );
 };

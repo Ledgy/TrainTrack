@@ -32,6 +32,11 @@ module.exports = gql`
     distance: Int
   }
 
+  type Statistics {
+    trips: Int
+    distance: Int
+  }
+
   type Query {
     reloadFixtures: String
     hello: String
@@ -41,6 +46,7 @@ module.exports = gql`
     myTrips: [Trip]
     me: String
     leaderboard: [LeaderboardEntry]
+    statistics: Statistics
   }
 
   input LocationInput {

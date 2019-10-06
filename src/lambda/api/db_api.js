@@ -33,6 +33,19 @@ const internalMongoApi = db => ({
   async addTrip(trip) {
     await db.collection("trips").insert(trip);
   },
+  getStatistics: async () =>
+    (await db
+      .collection("trips")
+      .aggregate([
+        {
+          $group: {
+            _id: null,
+            trips: { $sum: 1 },
+            distance: { $sum: "$distance" }
+          }
+        }
+      ])
+      .toArray())[0],
   async reloadFixtures() {
     if (!db) return "db not available";
     _.FIXTURES.forEach(([name, sampleData]) => {

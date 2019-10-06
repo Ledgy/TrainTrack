@@ -5,6 +5,7 @@ module.exports = api => ({
     reloadFixtures: async (root, args, context) => {
       return api.reloadFixtures();
     },
+    statistics: () => api.getStatistics(),
     hello: async () => "Hello, world!",
     lastTrips: () => api.getLastTrips(),
     myTrips: async (root, args, context) => {

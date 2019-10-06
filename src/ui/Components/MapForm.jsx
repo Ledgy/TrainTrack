@@ -54,10 +54,10 @@ export const MapForm = () => {
   const [origin, setOrigin] = useState(emptyState);
   const [destination, setDestination] = useState(emptyState);
   const [date, setDate] = useState("");
-  console.log(origin, destination, date);
+
   return (
     <form
-      className="container form-layout"
+      className="form-layout"
       onSubmit={e => {
         e.preventDefault();
         console.log(origin, destination, date);

@@ -1,6 +1,6 @@
 const initDbApi = require("./api/db_api");
 
-export async function handler(event, context, callback) {
+exports.handler = async function(event, context, callback) {
   const api = await initDbApi();
   const body = JSON.parse(event.body);
   console.log(`email: ${body.user.email}`);

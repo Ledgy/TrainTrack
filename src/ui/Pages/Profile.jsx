@@ -2,6 +2,7 @@ import React from "react";
 
 import { Statistics } from "../Components/Statistics.jsx";
 import { Trips } from "../Components/Trips.jsx";
+import { Map } from "../Components/Map.jsx";
 
 export const Profile = ({ name, tripsData }) => (
   <div className="profile">
@@ -15,7 +16,7 @@ export const Profile = ({ name, tripsData }) => (
         <Trips tripsData={tripsData} />
       </div>
       <div className="col col-sm-12 col-lg-6">
-        <h3>Map</h3>
+        <Map />
       </div>
     </div>
   </div>

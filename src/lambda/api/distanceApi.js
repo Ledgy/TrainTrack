@@ -1,4 +1,4 @@
-const apiKey = process.env.REACT_APP_MAPS_KEY;
+const apiKey = process.env.SERVER_MAPS_KEY;
 
 const googleMapsClient = require("@google/maps").createClient({
   key: apiKey

@@ -177,11 +177,6 @@ button {
   margin: 1.5rem;
 }
 
-.profile .row,
-.home .row {
-  margin: 32px -15px 0;
-}
-
 .text-center {
   text-align: center !important;
 }
@@ -226,8 +221,8 @@ button {
   color: #0c5870;
 }
 
-.statistics-value {
-  display: flex;
+.statistics-box h2 {
+  font-weight: 400;
 }
 
 /* Trip list */

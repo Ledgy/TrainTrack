@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import { Statistics } from "../Components/Statistics.jsx";
 import { Trips } from "../Components/Trips.jsx";
 import { Map } from "../Components/Map.jsx";
+import { Row, Col } from "../Components/Utilities.jsx";
 
 export const GET_USER_DETAILS = gql`
   query UserDetails($userId: ID!) {
@@ -40,19 +41,21 @@ export const Profile = ({ match }) => {
   if (!data) return null;
   return (
     <div className="profile">
-      <Statistics {...data.userStatistics} />
+      <Row>
+        <Statistics {...data.userStatistics} />
+      </Row>
 
-      <div className="row">
-        <div className="col col-sm-12 col-lg-6">
+      <Row className="my-4">
+        <Col className="col-sm-12 col-lg-6">
           <Trips
             trips={data.userTrips}
             name={data.userProfile ? data.userProfile.name : "Unknown user"}
           />
-        </div>
-        <div className="col col-sm-12 col-lg-6">
+        </Col>
+        <Col className="col-sm-12 col-lg-6">
           <Map trips={data.userTrips} />
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
   );
 };

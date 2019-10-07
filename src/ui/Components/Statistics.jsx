@@ -1,14 +1,18 @@
 import React from "react";
 import trainIcon from "../../static/trainIcon.png";
+import backpackIcon from "../../static/backpackIcon.png";
+import offsetIcon from "../../static/offsetIcon.png";
+import saveIcon from "../../static/saveIcon.png";
 import { formatDistance, formatCo2, formatMoneySaved } from "../format";
+import { Col } from "./Utilities.jsx";
 
-const getStatisticsBox = ({ title, value, icon }) => (
-  <div className="px-4 statistics-box" key={title}>
-    <div className="statistics-value">
-      <img src={icon} alt="Train Icon" />
-      {value && <h4 className="my-2">{value}</h4>}
+const StatisticsBox = ({ title, value, icon }) => (
+  <div className="px-3 statistics-box align-self-center">
+    <div className="d-flex align-items-center justify-content-center mb-2">
+      <img src={icon} alt={title} height="45px" className="mr-2" />
+      {value && <h2>{value}</h2>}
     </div>
-    <div className="statistics-title">{title}</div>
+    <div>{title}</div>
   </div>
 );
 
@@ -21,17 +25,17 @@ const getStats = (trips, distance) => [
   {
     title: "Distance",
     value: formatDistance(distance),
-    icon: trainIcon
+    icon: backpackIcon
   },
   {
     title: "C02 saved",
     value: formatCo2(distance),
-    icon: trainIcon
+    icon: saveIcon
   },
   {
     title: "Money saved",
     value: formatMoneySaved(distance),
-    icon: trainIcon
+    icon: offsetIcon
   }
 ];
 
@@ -39,13 +43,9 @@ export const Statistics = ({ trips, distance }) => {
   if (!distance) {
     return null;
   }
-  return (
-    <div className="row">
-      <div className="col col-xs-12">
-        <div className="d-inline-flex">
-          {getStats(trips, distance).map(stat => getStatisticsBox({ ...stat }))}
-        </div>
-      </div>
-    </div>
-  );
+  return getStats(trips, distance).map(stat => (
+    <Col className="col-6 col-lg-3 mt-4" key={stat.title}>
+      <StatisticsBox {...stat} />
+    </Col>
+  ));
 };

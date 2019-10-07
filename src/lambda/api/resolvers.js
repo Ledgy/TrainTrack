@@ -19,15 +19,20 @@ module.exports = api => ({
   },
   Mutation: {
     addTrip: async (root, args, context) => {
+      console.log("context", context);
+      console.log("args", args);
+
       if (!context.user.sub || !args.trip) {
         return null;
       }
       const userId = context.user.sub;
+      console.log("userId", userId);
       const { origin, destination } = args.trip;
       const distanceResult = await getDistance(
         origin.displayName,
         destination.displayName
       );
+      console.log("distanceResult", distanceResult);
       const { distance, originName, destinationName } = distanceResult;
       if (!distance) return null;
       const populatedTrip = {

@@ -35,7 +35,7 @@ const internalMongoApi = db => ({
   },
   deleteTrip(id) {
     db.collection("trips").deleteOne({ _id: id });
-  }
+  },
   async addTrip(trip) {
     await db.collection("trips").insert(trip);
   },

@@ -8,7 +8,8 @@ const getDistanceMatrix = (service, data) =>
   new Promise((resolve, reject) => {
     service.distanceMatrix(data, (error, response) => {
       console.log("google API response", response);
-      if (response.status === 200 && response.json.status === "OK") {
+      console.log("google API error", error);
+      if (!error) {
         resolve(response);
       } else {
         reject(error);

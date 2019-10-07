@@ -1,6 +1,9 @@
 export const routeOptions = {
   travelMode: "TRANSIT",
-  transitOptions: { modes: ["TRAIN"] },
+  transitOptions: {
+    modes: ["TRAIN"],
+    departureTime: new Date().setHours(7)
+  },
   provideRouteAlternatives: false
 };
 
@@ -346,7 +349,7 @@ export const addTripsToMap = trips => {
   }
   const directionsService = new window.google.maps.DirectionsService();
 
-  trips.forEach(trip => {
+  trips.forEach((trip, index) => {
     const origin = getGoogleLocationFromCoordinates(
       trip.origin.latitude,
       trip.origin.longitude
@@ -365,21 +368,25 @@ export const addTripsToMap = trips => {
       suppressInfoWindows: true
     });
     directionsRenderer.setMap(map);
-    directionsService.route(request, (response, status) => {
-      if (status === "OK") {
-        const path = response.routes[0].overview_path;
-        const line = new google.maps.Polyline({
-          path,
-          geodesic: true,
-          strokeColor: "#41ead4",
-          strokeOpacity: 0.5,
-          strokeWeight: 2
-        });
-        line.setMap(map);
-      } else {
-        console.log("couldn't retrieve route", status);
-      }
-    });
+    const drawTrip = () => {
+      directionsService.route(request, (response, status) => {
+        if (status === "OK") {
+          const path = response.routes[0].overview_path;
+          const line = new google.maps.Polyline({
+            path,
+            geodesic: true,
+            strokeColor: "#41ead4",
+            strokeOpacity: 0.5,
+            strokeWeight: 2
+          });
+          line.setMap(map);
+        } else {
+          console.log("couldn't retrieve route", status);
+        }
+      });
+    };
+
+    setTimeout(drawTrip, index * 10);
   });
 };
 

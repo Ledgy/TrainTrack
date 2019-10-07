@@ -3,6 +3,8 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
 
 import { addTripsToMap } from "../../MapHelpers";
 
@@ -51,10 +53,21 @@ const AutocompletePlaceField = ({ place, setPlace, placeholder }) => {
 
 const colClass = "col-md-3 d-flex flex-column align-items-start my-2";
 
+const ADD_TRIP = gql`
+  mutation addTrip($trip: TripInput!) {
+    addTrip(trip: $trip) {
+      userId
+    }
+  }
+`;
+
+const dateToHours = date => Math.round(new Date(date).getTime() / 3600000);
+
 export const MapForm = () => {
   const [origin, setOrigin] = useState(emptyState);
   const [destination, setDestination] = useState(emptyState);
   const [date, setDate] = useState("");
+  const [addTrip] = useMutation(ADD_TRIP);
   if (origin.latitude && destination.latitude) {
     addTripsToMap([
       {
@@ -71,7 +84,13 @@ export const MapForm = () => {
       className="form-layout"
       onSubmit={e => {
         e.preventDefault();
-        console.log(origin, destination, date);
+        const timestamp = dateToHours(date);
+        const trip = {
+          origin,
+          destination,
+          timestamp
+        };
+        addTrip({ variables: { trip } });
       }}
     >
       <Row>

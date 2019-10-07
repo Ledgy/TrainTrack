@@ -28,9 +28,16 @@ export const Identity = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(null);
+  };
+
   useEffect(() => {
     netlifyIdentity.on("init", handleLogin);
     netlifyIdentity.on("login", handleLogin);
+    netlifyIdentity.on("logout", handleLogout);
     netlifyIdentity.init();
   }, []);
 
@@ -41,9 +48,15 @@ export const Identity = () => {
       </button>
     );
   }
+
   return (
-    <Link to={`/${getProfileUrl(user.id)}`}>
-      <p className="Header-link">Profile</p>
-    </Link>
+    <>
+      <Link to={`/${getProfileUrl(user.id)}`}>
+        <p className="Header-link">Profile</p>
+      </Link>
+      <button type="button" onClick={() => netlifyIdentity.logout()}>
+        Logout
+      </button>
+    </>
   );
 };

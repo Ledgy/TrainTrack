@@ -5,11 +5,6 @@ import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import { getProfileUrl } from "../format.js";
 
-const open = () => {
-  netlifyIdentity.init();
-  netlifyIdentity.open();
-};
-
 const REGISTER_USER = gql`
   mutation registerUser {
     registerUser
@@ -43,9 +38,14 @@ export const Identity = () => {
 
   if (!user) {
     return (
-      <button type="button" onClick={open}>
-        Login/Signup
-      </button>
+      <>
+        <button type="button" onClick={() => netlifyIdentity.open("signup")}>
+          Signup
+        </button>
+        <button type="button" onClick={() => netlifyIdentity.open("login")}>
+          Login
+        </button>
+      </>
     );
   }
 

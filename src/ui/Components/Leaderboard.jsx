@@ -26,6 +26,7 @@ export const Leaderboard = () => {
   return (
     <div className="leaderboard p-4">
       <h3 className="text-center pt-0">Leaderboard</h3>
+      <p className="text-center">Bringing our planet back on track</p>
       <div className="leaderboard-entries">
         {data.leaderboard.map(({ userId, distance }, i) => (
           <Row key={userId} className="my-2 justify-content-center">

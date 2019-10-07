@@ -37,6 +37,12 @@ const internalMongoApi = db => ({
   async addTrip(trip) {
     await db.collection("trips").insert(trip);
   },
+  async upsertUser({ userId, name }) {
+    console.log("Made it to upsertUser");
+    await db
+      .collection("users")
+      .updateOne({ userId }, { $set: { userId, name } }, { upsert: true });
+  },
   getStatistics: async userId =>
     (await db
       .collection("trips")

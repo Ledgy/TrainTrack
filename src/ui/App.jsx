@@ -1,14 +1,10 @@
 import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
-import { BrowserRouter, Link } from "react-router-dom";
 import { FirstStageBooster } from "./FirstStageBooster.jsx";
 
 import "./styles/App.css";
-import { Identity } from "./identity/Widget.jsx";
 import { GET_APP_DATA } from "./queries";
-
-import ttLogo from "../static/ttLogo.png";
 
 const client = new ApolloClient({
   uri: "/.netlify/functions/graphql",
@@ -22,25 +18,12 @@ const client = new ApolloClient({
   }
 });
 
-const DataFetcher = ({ render }) => (
+export const App = () => (
   <ApolloProvider client={client}>
     <Query query={GET_APP_DATA}>
-      {({ data }) => (data ? render(data) : <div>Loading ...</div>)}
+      {({ data }) =>
+        data ? <FirstStageBooster data={data} /> : <div>Loading…</div>
+      }
     </Query>
   </ApolloProvider>
-);
-
-export const App = () => (
-  <BrowserRouter>
-    <div className="App">
-      <header className="App-header">
-        <Link to="/">
-          <img src={ttLogo} alt="Train Track Logo" className="logo" />
-        </Link>
-
-        <Identity />
-      </header>
-      <DataFetcher render={data => <FirstStageBooster data={data} />} />
-    </div>
-  </BrowserRouter>
 );

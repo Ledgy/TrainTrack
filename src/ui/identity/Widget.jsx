@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useMutation } from "@apollo/react-hooks";
 import netlifyIdentity from "netlify-identity-widget";
+import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 
 const open = () => {
@@ -7,18 +9,29 @@ const open = () => {
   netlifyIdentity.open();
 };
 
+const REGISTER_USER = gql`
+  mutation registerUser {
+    registerUser
+  }
+`;
+
 export const Identity = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const updateToken = authenticatedUser => {
+  const [registerUser] = useMutation(REGISTER_USER);
+  const handleLogin = authenticatedUser => {
     if (authenticatedUser) {
       setUser(authenticatedUser);
       localStorage.setItem("user", JSON.stringify(authenticatedUser));
       localStorage.setItem("token", authenticatedUser.token.access_token);
+      registerUser();
     }
   };
 
-  netlifyIdentity.on("init", updateToken);
-  netlifyIdentity.on("login", updateToken);
+  useEffect(() => {
+    netlifyIdentity.on("init", handleLogin);
+    netlifyIdentity.on("login", handleLogin);
+    netlifyIdentity.init();
+  }, []);
 
   if (!user) {
     return (

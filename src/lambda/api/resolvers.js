@@ -45,6 +45,14 @@ module.exports = api => ({
       if (trip.userId !== context.user.sub) return null;
       api.deleteTrip(args.id);
       return args.id;
+    },
+    registerUser: (root, args, { user }) => {
+      if (!user) return;
+
+      api.upsertUser({
+        userId: user.sub,
+        name: user.user_metadata.full_name
+      });
     }
   }
 });

@@ -24,9 +24,7 @@ const client = new ApolloClient({
 
 const DataFetcher = ({ render }) => (
   <ApolloProvider client={client}>
-    <Query
-      query={GET_APP_DATA}
-    >
+    <Query query={GET_APP_DATA}>
       {({ data }) => (data ? render(data) : <div>Loading ...</div>)}
     </Query>
   </ApolloProvider>

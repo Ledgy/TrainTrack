@@ -7,7 +7,7 @@ export const Map = ({ trips }) => {
       initializeMap();
       addTripsToMap(trips);
     }, 500);
-  }, []);
+  });
 
   return (
     <div

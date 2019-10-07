@@ -7,13 +7,7 @@ import { Profile } from "./Pages/Profile.jsx";
 export const FirstStageBooster = ({ data }) => (
   <div test={console.log(data)}>
     <Switch>
-      <Route path="/profile">
-        <Profile
-          name="T‘Pol"
-          trips={data.myTrips}
-          statistics={data.statistics}
-        />
-      </Route>
+      <Route path="/:userId" component={Profile} />
       <Route path="/">
         <Home data={data} />
       </Route>

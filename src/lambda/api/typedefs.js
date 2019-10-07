@@ -40,13 +40,13 @@ module.exports = gql`
   type Query {
     reloadFixtures: String
     hello: String
-    user(userId: ID!): UserProfile
-    userNames: [UserName]
     lastTrips: [Trip]
-    myTrips: [Trip]
-    me: String
+    userNames: [UserName]
     leaderboard: [LeaderboardEntry]
     statistics: Statistics
+    userProfile(userId: ID!): UserProfile
+    userTrips(userId: ID!): [Trip]
+    userStatistics(userId: ID!): Statistics
   }
 
   input TripInput {

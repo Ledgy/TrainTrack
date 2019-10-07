@@ -8,16 +8,12 @@ module.exports = api => ({
     statistics: () => api.getStatistics(),
     hello: async () => "Hello, world!",
     lastTrips: () => api.getLastTrips(),
-    myTrips: async (root, args, context) => {
-      return context.user ? api.getUserTrips(context.user.sub) : [];
-    },
-    user: async (root, args) => api.getUser(args.userId),
+    userTrips: (root, args) => api.getUserTrips(args.userId),
+    userStatistics: (root, args) => api.getStatistics(args.userId),
+    userProfile: async (root, args) => api.getUser(args.userId),
     userNames: async () => {
       const names = await api.getUserNames();
       return names;
-    },
-    me: async (root, args, context) => {
-      return context.user_metadata ? context.user_metadata.full_name : "";
     },
     leaderboard: async () => api.getLeaderboard()
   },

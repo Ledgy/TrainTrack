@@ -33,10 +33,17 @@ const internalMongoApi = db => ({
   async addTrip(trip) {
     await db.collection("trips").insert(trip);
   },
-  getStatistics: async () =>
+  getStatistics: async userId =>
     (await db
       .collection("trips")
       .aggregate([
+        {
+          $match: userId
+            ? {
+                userId
+              }
+            : {}
+        },
         {
           $group: {
             _id: null,

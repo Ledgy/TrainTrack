@@ -6,7 +6,7 @@ const getStatisticsBox = ({ title, value, icon }) => (
   <div className="px-4 statistics-box" key={title}>
     <div className="statistics-value">
       <img src={icon} alt="Train Icon" />
-      <h4 className="my-2">{value}</h4>
+      {value && <h4 className="my-2">{value}</h4>}
     </div>
     <div className="statistics-title">{title}</div>
   </div>

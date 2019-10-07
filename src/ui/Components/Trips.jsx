@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import trainIcon from "../../static/trainIcon.png";
-import { formatDistance } from "../format";
+import { formatDistance, formatTimestamp } from "../format";
 
 const DELETE_TRIP = gql`
   mutation deleteTrip($id: ID!) {
@@ -23,7 +23,7 @@ const TripRow = ({
     <p className="px-2">{origin.displayName.slice(0, 20)}</p>
     <img src={trainIcon} alt="Train Icon" className="trip-icon my-auto" />
     <p className="px-2">{destination.displayName.slice(0, 20)}</p>
-    <p className="px-2">{new Date(timestamp * 3600000).toLocaleDateString()}</p>
+    <p className="px-2">{formatTimestamp(timestamp)}</p>
     <p className="px-2">{formatDistance(distance)}</p>
     <button
       className="button-remove"

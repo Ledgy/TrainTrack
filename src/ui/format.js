@@ -12,3 +12,6 @@ export const formatMoneySaved = distance =>
   `$${Math.round(distance * km * kgPerKm * usdPerKg).toLocaleString()}`;
 
 export const getShortId = userId => userId.slice(0, 8);
+
+export const formatTimestamp = timestamp =>
+  new Date(timestamp * 3600000).toLocaleDateString();

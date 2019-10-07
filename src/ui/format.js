@@ -11,4 +11,4 @@ export const formatCo2 = distance =>
 export const formatMoneySaved = distance =>
   `$${Math.round(distance * km * kgPerKm * usdPerKg).toLocaleString()}`;
 
-export const getProfileUrl = userId => userId.slice(0, 8);
+export const getShortId = userId => userId.slice(0, 8);

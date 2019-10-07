@@ -12,7 +12,7 @@ export const Home = ({ data }) => (
     </Row>
     <Row className="my-4">
       <Col className="col col-xs-12">
-        <MapForm data={data} />
+        <MapForm />
       </Col>
     </Row>
     <Row className="my-4">

@@ -5,8 +5,10 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
+import { withRouter } from "react-router-dom";
 
 import { addTripsToMap } from "../../MapHelpers";
+import { getShortId } from "../format.js";
 
 import { Row, Col } from "./Utilities.jsx";
 
@@ -63,7 +65,7 @@ const ADD_TRIP = gql`
 
 const dateToHours = date => Math.round(new Date(date).getTime() / 3600000);
 
-export const MapForm = () => {
+export const MapForm = withRouter(({ history }) => {
   const [origin, setOrigin] = useState(emptyState);
   const [destination, setDestination] = useState(emptyState);
   const [date, setDate] = useState("");
@@ -79,10 +81,12 @@ export const MapForm = () => {
       }
     ]);
   }
+  const { id } = JSON.parse(localStorage.getItem("user")) || {};
+  const shortId = getShortId(id);
   return (
     <form
       className="form-layout"
-      onSubmit={e => {
+      onSubmit={async e => {
         e.preventDefault();
         const timestamp = dateToHours(date);
         const trip = {
@@ -90,10 +94,11 @@ export const MapForm = () => {
           destination,
           timestamp
         };
-        addTrip({ variables: { trip } });
+        await addTrip({ variables: { trip } });
         setOrigin(emptyState);
         setDestination(emptyState);
         setDate("");
+        setTimeout(history.push(`/${shortId}`), 1000);
       }}
     >
       <Row>
@@ -122,7 +127,7 @@ export const MapForm = () => {
           <button
             className="button-cta"
             type="submit"
-            disabled={!origin || !destination || !date}
+            disabled={!origin || !destination || !date || !shortId}
           >
             Add Trip
           </button>
@@ -130,4 +135,4 @@ export const MapForm = () => {
       </Row>
     </form>
   );
-};
+});

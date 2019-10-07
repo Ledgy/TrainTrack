@@ -9,7 +9,7 @@ import ttLogo from "../static/ttLogo.png";
 
 export const FirstStageBooster = ({ data }) => (
   <BrowserRouter>
-    <div className="App" test={console.log(data)}>
+    <div className="App">
       <header className="App-header">
         <Link to="/">
           <img src={ttLogo} alt="Train Track Logo" className="logo" />

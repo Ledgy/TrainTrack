@@ -19,10 +19,7 @@ module.exports = api => ({
   },
   Mutation: {
     addTrip: async (root, args, context) => {
-      console.log("context", context);
-      console.log("args", args);
-
-      if (!context.user.sub || !args.trip) {
+      if (!context.user || !args.trip) {
         return null;
       }
       const userId = context.user.sub;

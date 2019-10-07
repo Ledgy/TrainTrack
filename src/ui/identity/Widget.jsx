@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import netlifyIdentity from "netlify-identity-widget";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
-import { getProfileUrl } from "../format.js";
+import { getShortId } from "../format.js";
 
 const REGISTER_USER = gql`
   mutation registerUser {
@@ -51,7 +51,7 @@ export const Identity = () => {
 
   return (
     <>
-      <Link to={`/${getProfileUrl(user.id)}`}>
+      <Link to={`/${getShortId(user.id)}`}>
         <p className="Header-link">Profile</p>
       </Link>
       <button type="button" onClick={() => netlifyIdentity.logout()}>

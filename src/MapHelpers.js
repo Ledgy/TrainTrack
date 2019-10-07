@@ -347,7 +347,7 @@ const getGoogleLocationFromCoordinates = (longitude, latitude) =>
   new window.google.maps.LatLng(longitude, latitude);
 
 const addTripToMap = (directionsService, map) => trip =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     const origin = getGoogleLocationFromCoordinates(
       trip.origin.latitude,
       trip.origin.longitude
@@ -377,9 +377,10 @@ const addTripToMap = (directionsService, map) => trip =>
           strokeWeight: 2
         });
         line.setMap(map);
-        resolve();
+      } else {
+        console.log(response);
       }
-      reject(response);
+      resolve();
     });
   });
 

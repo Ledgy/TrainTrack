@@ -2,7 +2,7 @@ export const routeOptions = {
   travelMode: "TRANSIT",
   transitOptions: {
     modes: ["TRAIN"],
-    departureTime: new Date().setHours(7)
+    departureTime: new Date(new Date().setHours(7))
   },
   provideRouteAlternatives: false
 };

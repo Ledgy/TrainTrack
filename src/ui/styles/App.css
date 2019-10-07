@@ -292,7 +292,6 @@ input:focus {
 
 .autocomplete-wrapper {
   position: relative;
-  z-index: 100;
 }
 
 .autocomplete-dropdown-container {
@@ -302,6 +301,7 @@ input:focus {
   background-color: var(--white);
   border-radius: var(--border-radius-small);
   width: var(--form-field-width);
+  z-index: 100;
 }
 
 .autocomplete-item {

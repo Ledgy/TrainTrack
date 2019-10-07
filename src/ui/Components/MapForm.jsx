@@ -91,6 +91,9 @@ export const MapForm = () => {
           timestamp
         };
         addTrip({ variables: { trip } });
+        setOrigin(emptyState);
+        setDestination(emptyState);
+        setDate("");
       }}
     >
       <Row>
@@ -116,7 +119,11 @@ export const MapForm = () => {
           </div>
         </Col>
         <Col className={colClass}>
-          <button className="button-cta" type="submit">
+          <button
+            className="button-cta"
+            type="submit"
+            disabled={!origin || !destination || !date}
+          >
             Add Trip
           </button>
         </Col>

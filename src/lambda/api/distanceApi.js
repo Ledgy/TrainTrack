@@ -6,8 +6,8 @@ const googleMapsClient = require("@google/maps").createClient({
 
 const getDistanceMatrix = (service, data) =>
   new Promise((resolve, reject) => {
-    service.distanceMatrix(data, (x, response) => {
-      if (response.status === 200) {
+    service.distanceMatrix(data, (stringResponse, response) => {
+      if (response.status === 200 && response.json.status === "OK") {
         resolve(response);
       } else {
         reject(response);
@@ -23,9 +23,11 @@ module.exports = async (origin, destination) => {
     transit_mode: ["rail"]
   });
   const { json } = response || { status: "" };
-  if (!json.status === "OK") return {};
+  if (!json.status === "OK") return null;
+
   const { status, distance } = json.rows.length > 0 && json.rows[0].elements[0];
-  if (!status === "OK") return {};
+  if (!status === "OK") return null;
+
   return {
     distance: distance.value,
     originName: json.origin_addresses[0],

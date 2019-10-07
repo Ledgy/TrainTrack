@@ -49,15 +49,9 @@ module.exports = gql`
     statistics: Statistics
   }
 
-  input LocationInput {
-    latitude: Float
-    longitude: Float
-    displayName: String
-  }
-
   input TripInput {
-    origin: LocationInput
-    destination: LocationInput
+    origin: String
+    destination: String
     timestamp: Int
   }
 

@@ -27,18 +27,15 @@ module.exports = api => ({
         (!context.user_metadata && process.env.ENV !== "development") ||
         !args.trip
       ) {
-        return;
+        return null;
       }
       const userId =
         (context.user_metadata && context.user_metadata.id) || "21";
 
       const { origin, destination } = args.trip;
-      const distanceResult = await getDistance(
-        origin.displayName,
-        destination.displayName
-      );
+      const distanceResult = await getDistance(origin, destination);
       const { distance, originName, destinationName } = distanceResult;
-      if (!distance) return;
+      if (!distance) return null;
       const populatedTrip = {
         ...args.trip,
         userId,

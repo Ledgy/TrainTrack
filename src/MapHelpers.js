@@ -349,7 +349,16 @@ export const addTripsToMap = trips => {
   }
   const directionsService = new window.google.maps.DirectionsService();
 
-  trips.forEach((trip, index) => {
+  const filteredTrips = [
+    ...new Set(
+      trips.map(({ origin, destination }) => ({
+        origin,
+        destination
+      }))
+    )
+  ];
+
+  filteredTrips.forEach((trip, index) => {
     const drawTrip = t => {
       const origin = getGoogleLocationFromCoordinates(
         t.origin.latitude,
@@ -387,7 +396,7 @@ export const addTripsToMap = trips => {
       });
     };
 
-    setTimeout(() => drawTrip(trip), index * 200);
+    setTimeout(() => drawTrip(trip), index * 250);
   });
 };
 

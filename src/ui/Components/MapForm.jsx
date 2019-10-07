@@ -103,18 +103,20 @@ export const MapForm = withRouter(({ history }) => {
     >
       <Row>
         <Col className={colClass}>
-          <div>Origin</div>
-          <AutocompletePlaceField place={origin} setPlace={setOrigin} />
-        </Col>
-        <Col className={colClass}>
-          <div>Destination</div>
           <AutocompletePlaceField
-            place={destination}
-            setPlace={setDestination}
+            place={origin}
+            setPlace={setOrigin}
+            placeholder="Origin"
           />
         </Col>
         <Col className={colClass}>
-          <div>Date</div>
+          <AutocompletePlaceField
+            place={destination}
+            setPlace={setDestination}
+            placeholder="Destination"
+          />
+        </Col>
+        <Col className={colClass}>
           <div>
             <input
               type="date"

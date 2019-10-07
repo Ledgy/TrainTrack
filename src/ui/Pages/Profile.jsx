@@ -36,7 +36,7 @@ export const GET_USER_DETAILS = gql`
 `;
 
 export const Profile = ({ match }) => {
-  const { data } = useQuery(GET_USER_DETAILS, {
+  const { data, refetch } = useQuery(GET_USER_DETAILS, {
     variables: { userId: match.params.userId }
   });
   if (!data) return null;
@@ -52,6 +52,7 @@ export const Profile = ({ match }) => {
           <Trips
             trips={data.userTrips}
             name={data.userProfile ? data.userProfile.name : "Unknown user"}
+            refetch={refetch}
           />
         </Col>
         <Col className="col-sm-12 col-lg-6">

@@ -32,7 +32,14 @@ export const App = () => (
       <span role="img" aria-label="love">
         👾 🌴 🍕 ❤️
       </span>{" "}
-      by the Ledgy® team
+      by the{" "}
+      <a
+        href="https://ledgy.com/about-us/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Ledgy® team
+      </a>
     </footer>
   </>
 );

@@ -336,8 +336,52 @@ export const mapStyles = [
   }
 ];
 
+const asyncForEach = async (array, callback) => {
+  for (let index = 0; index < array.length; index += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await callback(array[index], index, array);
+  }
+};
+
 const getGoogleLocationFromCoordinates = (longitude, latitude) =>
   new window.google.maps.LatLng(longitude, latitude);
+
+const addTripToMap = (directionsService, map) => trip =>
+  new Promise((resolve, reject) => {
+    const origin = getGoogleLocationFromCoordinates(
+      trip.origin.latitude,
+      trip.origin.longitude
+    );
+    const destination = getGoogleLocationFromCoordinates(
+      trip.destination.latitude,
+      trip.destination.longitude
+    );
+    const request = {
+      origin,
+      destination,
+      ...routeOptions
+    };
+    const directionsRenderer = new window.google.maps.DirectionsRenderer({
+      suppressMarkers: true,
+      suppressInfoWindows: true
+    });
+    directionsRenderer.setMap(map);
+    directionsService.route(request, (response, status) => {
+      if (status === "OK") {
+        const path = response.routes[0].overview_path;
+        const line = new window.google.maps.Polyline({
+          path,
+          geodesic: true,
+          strokeColor: "#41ead4",
+          strokeOpacity: 0.5,
+          strokeWeight: 2
+        });
+        line.setMap(map);
+        resolve();
+      }
+      reject(response);
+    });
+  });
 
 export const addTripsToMap = trips => {
   if (!trips) return;
@@ -349,55 +393,7 @@ export const addTripsToMap = trips => {
   }
   const directionsService = new window.google.maps.DirectionsService();
 
-  const filteredTrips = [
-    ...new Set(
-      trips.map(({ origin, destination }) => ({
-        origin,
-        destination
-      }))
-    )
-  ];
-
-  filteredTrips.forEach((trip, index) => {
-    const drawTrip = t => {
-      const origin = getGoogleLocationFromCoordinates(
-        t.origin.latitude,
-        t.origin.longitude
-      );
-      const destination = getGoogleLocationFromCoordinates(
-        t.destination.latitude,
-        t.destination.longitude
-      );
-      const request = {
-        origin,
-        destination,
-        ...routeOptions
-      };
-      const directionsRenderer = new window.google.maps.DirectionsRenderer({
-        suppressMarkers: true,
-        suppressInfoWindows: true
-      });
-      directionsRenderer.setMap(map);
-      directionsService.route(request, (response, status) => {
-        if (status === "OK") {
-          console.log("drawing!");
-          const path = response.routes[0].overview_path;
-          const line = new google.maps.Polyline({
-            path,
-            geodesic: true,
-            strokeColor: "#41ead4",
-            strokeOpacity: 0.5,
-            strokeWeight: 2
-          });
-          line.setMap(map);
-        } else {
-          console.log("couldn't retrieve route", status);
-        }
-      });
-    };
-
-    setTimeout(() => drawTrip(trip), index * 250);
-  });
+  asyncForEach(trips, addTripToMap(directionsService, map));
 };
 
 export const initializeMap = () => {

@@ -1,6 +1,8 @@
 const connectToMongoDB = require("./db_client");
 const _ = require("./db_helpers");
 
+const getUserRegex = userId => ({ userId: { $regex: `^${userId}` } });
+
 const internalMongoApi = db => ({
   createLog(payload) {
     return db.collection("logs").insert(payload);
@@ -9,7 +11,7 @@ const internalMongoApi = db => ({
     return db.collection("users").insert(payload);
   },
   getUser(userId) {
-    return db.collection("users").findOne({ userId: { $regex: `^${userId}` } });
+    return db.collection("users").findOne(getUserRegex(userId));
   },
   getUserNames() {
     return db
@@ -25,7 +27,7 @@ const internalMongoApi = db => ({
   getUserTrips(userId) {
     return db
       .collection("trips")
-      .find({ userId })
+      .find(getUserRegex(userId))
       .toArray();
   },
   getTrip(id) {
@@ -38,7 +40,6 @@ const internalMongoApi = db => ({
     await db.collection("trips").insert(trip);
   },
   async upsertUser({ userId, name }) {
-    console.log("Made it to upsertUser");
     await db
       .collection("users")
       .updateOne({ userId }, { $set: { userId, name } }, { upsert: true });
@@ -47,7 +48,7 @@ const internalMongoApi = db => ({
     (await db
       .collection("trips")
       .aggregate([
-        ...(userId ? [{ $match: { userId } }] : []),
+        ...(userId ? [{ $match: getUserRegex(userId) }] : []),
         {
           $group: {
             _id: null,

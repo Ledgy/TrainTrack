@@ -1,5 +1,5 @@
 import React from "react";
-import ApolloClient, { gql } from "apollo-boost";
+import ApolloClient from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
 import { BrowserRouter, Link } from "react-router-dom";
 import { FirstStageBooster } from "./FirstStageBooster.jsx";

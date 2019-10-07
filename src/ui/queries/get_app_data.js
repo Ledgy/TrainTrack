@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost";
 
 export const GET_APP_DATA = gql`
-{
+query GetAppData {
   user(userId: 10) {
     name
   }

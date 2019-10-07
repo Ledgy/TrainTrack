@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import netlifyIdentity from "netlify-identity-widget";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
+import { getProfileUrl } from "../format.js";
 
 const open = () => {
   netlifyIdentity.init();
@@ -41,7 +42,7 @@ export const Identity = () => {
     );
   }
   return (
-    <Link to={`/${user.id}`}>
+    <Link to={`/${getProfileUrl(user.id)}`}>
       <p className="Header-link">Profile</p>
     </Link>
   );

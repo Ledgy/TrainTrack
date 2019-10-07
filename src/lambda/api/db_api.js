@@ -9,7 +9,7 @@ const internalMongoApi = db => ({
     return db.collection("users").insert(payload);
   },
   getUser(userId) {
-    return db.collection("users").findOne({ userId });
+    return db.collection("users").findOne({ userId: { $regex: `^${userId}` } });
   },
   getUserNames() {
     return db

@@ -19,12 +19,14 @@ export const Identity = () => {
       setUser(authenticatedUser);
       localStorage.setItem("user", JSON.stringify(authenticatedUser));
       localStorage.setItem("token", authenticatedUser.token.access_token);
+      localStorage.setItem("userId", getShortId(authenticatedUser.id));
       registerUser();
     }
   };
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("userId");
     localStorage.removeItem("token");
     setUser(null);
   };

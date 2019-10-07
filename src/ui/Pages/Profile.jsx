@@ -36,11 +36,12 @@ export const GET_USER_DETAILS = gql`
 `;
 
 export const Profile = ({ match }) => {
+  const { userId } = match.params;
   const { data, refetch } = useQuery(GET_USER_DETAILS, {
-    variables: { userId: match.params.userId }
+    variables: { userId }
   });
   if (!data) return null;
-  console.log("userData", data);
+  const isMe = userId === localStorage.getItem("userId");
   return (
     <div className="profile">
       <Row>
@@ -53,6 +54,7 @@ export const Profile = ({ match }) => {
             trips={data.userTrips}
             name={data.userProfile ? data.userProfile.name : "Unknown user"}
             refetch={refetch}
+            isMe={isMe}
           />
         </Col>
         <Col className="col-sm-12 col-lg-6">

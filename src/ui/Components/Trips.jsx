@@ -17,7 +17,8 @@ const TripRow = ({
   timestamp,
   distance,
   deleteTrip,
-  refetch
+  refetch,
+  isMe
 }) => (
   <div className="px-4 d-inline-flex trip-box">
     <p className="px-2">{origin.displayName.slice(0, 20)}</p>
@@ -25,20 +26,22 @@ const TripRow = ({
     <p className="px-2">{destination.displayName.slice(0, 20)}</p>
     <p className="px-2">{formatTimestamp(timestamp)}</p>
     <p className="px-2">{formatDistance(distance)}</p>
-    <button
-      className="button-remove"
-      type="button"
-      onClick={() => {
-        deleteTrip({ variables: { id: _id } });
-        refetch();
-      }}
-    >
-      <i className="fa fa-trash" />
-    </button>
+    {isMe && (
+      <button
+        className="button-remove"
+        type="button"
+        onClick={() => {
+          deleteTrip({ variables: { id: _id } });
+          refetch();
+        }}
+      >
+        <i className="fa fa-trash" />
+      </button>
+    )}
   </div>
 );
 
-export const Trips = ({ name, trips, refetch }) => {
+export const Trips = ({ name, trips, refetch, isMe }) => {
   const [deleteTrip] = useMutation(DELETE_TRIP);
   return (
     <div className="trip-card py-4">
@@ -51,6 +54,7 @@ export const Trips = ({ name, trips, refetch }) => {
             key={`${trip.timestamp}-${i}`}
             deleteTrip={deleteTrip}
             refetch={refetch}
+            isMe={isMe}
           />
         ))}
       </div>

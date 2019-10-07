@@ -8,7 +8,6 @@ import { useMutation } from "@apollo/react-hooks";
 import { withRouter } from "react-router-dom";
 
 import { addTripsToMap } from "../../MapHelpers";
-import { getShortId } from "../format.js";
 
 import { Row, Col } from "./Utilities.jsx";
 
@@ -81,8 +80,7 @@ export const MapForm = withRouter(({ history }) => {
       }
     ]);
   }
-  const { id } = JSON.parse(localStorage.getItem("user")) || {};
-  const shortId = id ? getShortId(id) : "";
+  const userId = localStorage.getItem("userId");
   return (
     <form
       className="form-layout"
@@ -98,7 +96,7 @@ export const MapForm = withRouter(({ history }) => {
         setOrigin(emptyState);
         setDestination(emptyState);
         setDate("");
-        setTimeout(history.push(`/${shortId}`), 1000);
+        setTimeout(history.push(`/${userId}`), 1000);
       }}
     >
       <Row>
@@ -129,7 +127,7 @@ export const MapForm = withRouter(({ history }) => {
           <button
             className="button-cta"
             type="submit"
-            disabled={!origin || !destination || !date || !shortId}
+            disabled={!origin || !destination || !date || !userId}
           >
             Add Trip
           </button>

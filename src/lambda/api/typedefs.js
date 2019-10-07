@@ -63,5 +63,6 @@ module.exports = gql`
 
   type Mutation {
     addTrip(trip: TripInput!): Trip
+    deleteTrip(id: String!): String
   }
 `;

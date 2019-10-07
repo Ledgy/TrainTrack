@@ -19,14 +19,11 @@ module.exports = api => ({
   },
   Mutation: {
     addTrip: async (root, args, context) => {
-      if (
-        (!context.user_metadata && process.env.ENV !== "development") ||
-        !args.trip
-      ) {
+      console.log("context", context);
+      if (!context.user_metadata || !args.trip) {
         return null;
       }
-      const userId =
-        (context.user_metadata && context.user_metadata.id) || "21";
+      const userId = context.user_metadata.id;
 
       const { origin, destination } = args.trip;
       const distanceResult = await getDistance(
@@ -44,6 +41,12 @@ module.exports = api => ({
       };
       api.addTrip(populatedTrip);
       return populatedTrip;
+    },
+    deleteTrip: async (root, args, context) => {
+      const trip = api.getTrip(args.id);
+      if (trip.userId !== context.user_metadata.id) return null; // TODO
+      api.deleteTrip(args.id);
+      return args.id;
     }
   }
 });

@@ -327,7 +327,9 @@ input:focus {
 .autocomplete-dropdown-container {
   position: absolute;
   top: 40px;
-  width: inherit;
+  left: 50%;
+  right: 50%;
+  margin-left: calc(var(--form-field-width) * -0.5);
   background-color: var(--white);
   border-radius: var(--border-radius-small);
   width: var(--form-field-width);
@@ -348,8 +350,10 @@ input:focus {
 
 .button-cta {
   font-weight: 500;
-  font-size: 24px;
-  height: 60px;
+  font-size: 20px;
+  height: 40px;
+  margin: auto auto 0;
+  width: var(--form-field-width);
 }
 
 .button-remove {

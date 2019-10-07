@@ -51,7 +51,7 @@ const AutocompletePlaceField = ({ place, setPlace, placeholder }) => {
   );
 };
 
-const colClass = "col-md-3 d-flex flex-column align-items-start my-2";
+const colClass = "col-lg-3 d-flex flex-column my-2";
 
 const ADD_TRIP = gql`
   mutation addTrip($trip: TripInput!) {

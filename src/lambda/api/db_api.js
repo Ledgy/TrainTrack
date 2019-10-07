@@ -23,7 +23,7 @@ const internalMongoApi = db => ({
   getLastTrips: () =>
     db
       .collection("trips")
-      .find({}, { sort: { timestamp: -1 }, limit: 100 })
+      .find({}, { sort: { timestamp: -1 }, limit: 20 })
       .toArray(),
   getUserTrips(userId) {
     return db

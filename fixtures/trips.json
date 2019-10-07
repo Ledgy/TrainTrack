@@ -12,7 +12,7 @@
       "longitude": 23.7275388
     },
     "distance": 2414728,
-    "timestamp": 1571668813,
+    "timestamp": 4366,
     "roundtrip": false
   },
   {
@@ -27,7 +27,7 @@
       "latitude": 43.2965,
       "longitude": 5.3698
     },
-    "timestamp": 1569916813,
+    "timestamp": 4361,
     "distance": 223885,
     "roundtrip": true
   },
@@ -43,7 +43,7 @@
       "latitude": 55.6727611,
       "longitude": 12.5649245
     },
-    "timestamp": 1569823200,
+    "timestamp": 4358,
     "distance": 663708,
     "roundtrip": false
   },
@@ -59,7 +59,7 @@
       "latitude": 47.37840449999999,
       "longitude": 8.538403299999999
     },
-    "date": 1570107600,
+    "timestamp": 4355,
     "distance": 1438006,
     "roundtrip": false
   }

@@ -56,6 +56,24 @@ button {
   padding: 10px;
   cursor: pointer;
   border: none;
+  transition: 300ms;
+}
+
+button:disabled {
+  pointer-events: none;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+button:hover {
+  box-shadow: 0px 2px 6px -2px var(--green-800);
+  transition: 300ms;
+  transform: translateY(-3px);
+}
+
+button:active {
+  transform: translateY(0px);
+  box-shadow: none;
 }
 
 a {

@@ -6,3 +6,6 @@
   Command = "npm run build && npm run build:lambda"
 [context.deploy-preview]
   Command = "npm run build && npm run build:lambda"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"

@@ -58,6 +58,12 @@ button {
   border: none;
 }
 
+a {
+  text-decoration: none;
+  color: var(--green-900);
+  position: relative;
+}
+
 .App {
   text-align: center;
 }
@@ -207,10 +213,22 @@ button {
   color: var(--green-800);
 }
 
-@media (max-width: 580px) {
-  .leaderboard-entries .col {
-    padding: 0;
+.leaderboard a:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1.2rem;
+  width: 100%;
+  border-bottom: 1px solid;
+  margin-top: 8px;
+  opacity: 0;
+  transition: 300ms;
+  transform: scale(0,1);
   }
+.leaderboard a:hover:after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Statistics */
@@ -270,7 +288,6 @@ button {
     margin-left: 40px;
   }
 }
-
 
 input {
   border-radius: var(--border-radius-small);

@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import { Link } from "react-router-dom";
 import { formatDistance, getProfileUrl } from "../format.js";
+import { Row, Col } from "./Utilities.jsx";
 
 const GET_LEADERBOARD = gql`
   {
@@ -27,15 +28,15 @@ export const Leaderboard = () => {
       <h3 className="text-center pt-0">Leaderboard</h3>
       <div className="leaderboard-entries">
         {data.leaderboard.map(({ userId, distance }, i) => (
-          <div className="row" key={userId}>
-            <div className="col col-1">{i + 1}.</div>
-            <div className="col col-7">
-              <Link className="col" to={`/${getProfileUrl(userId)}`}>
+          <Row key={userId} className="my-2 justify-content-center">
+            <Col className="col-1">{i + 1}.</Col>
+            <Col className="col-6">
+              <Link to={`/${getProfileUrl(userId)}`}>
                 {userNames.get(userId) || ""}
               </Link>
-            </div>
-            <div className="col col-4">{formatDistance(distance)}</div>
-          </div>
+            </Col>
+            <Col className="col-4">{formatDistance(distance)}</Col>
+          </Row>
         ))}
       </div>
     </div>

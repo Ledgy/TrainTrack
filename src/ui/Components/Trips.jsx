@@ -12,11 +12,11 @@ const getTrip = ({ origin, destination, timestamp, distance }, i) => (
   </div>
 );
 
-export const Trips = ({ tripsData }) => {
+export const Trips = ({ name, trips }) => {
   return (
     <div className="trip-card py-4">
-      <h1>My trips</h1>
-      <div>{tripsData.map((trip, i) => getTrip({ ...trip }, i))}</div>
+      <h1>{`${name}’s trips`}</h1>
+      <div>{trips.map((trip, i) => getTrip({ ...trip }, i))}</div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
+import { Link } from "react-router-dom";
 import { formatDistance } from "../format.js";
 
 const GET_LEADERBOARD = gql`
@@ -29,7 +30,9 @@ export const Leaderboard = () => {
           <div className="row" key={userId}>
             <div className="col col-1">{i + 1}.</div>
             <div className="col col-7">
-              <strong className="col">{userNames.get(userId) || ""}</strong>
+              <Link className="col" to={`/${userId}`}>
+                {userNames.get(userId) || ""}
+              </Link>
             </div>
             <div className="col col-4">{formatDistance(distance)}</div>
           </div>

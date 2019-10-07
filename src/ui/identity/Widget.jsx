@@ -13,6 +13,7 @@ export const Identity = () => {
     if (authenticatedUser) {
       setUser(authenticatedUser);
       localStorage.setItem("user", JSON.stringify(authenticatedUser));
+      localStorage.setItem("token", authenticatedUser.token.access_token);
     }
   };
 

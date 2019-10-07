@@ -8,6 +8,7 @@ module.exports = gql`
   }
 
   type Trip {
+    _id: ID
     userId: ID
     origin: Location
     destination: Location
@@ -63,7 +64,7 @@ module.exports = gql`
 
   type Mutation {
     addTrip(trip: TripInput!): Trip
-    deleteTrip(id: String!): String
     registerUser: Boolean
+    deleteTrip(id: ID!): ID
   }
 `;

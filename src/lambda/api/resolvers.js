@@ -41,9 +41,9 @@ module.exports = api => ({
       return populatedTrip;
     },
     deleteTrip: async (root, args, context) => {
-      const trip = api.getTrip(args.id);
-      if (trip.userId !== context.user.sub) return null;
-      api.deleteTrip(args.id);
+      if (!args.id || !context.user) return null;
+      const n = await api.deleteTrip(args.id, context.user.sub);
+      if (n === 0) return null;
       return args.id;
     },
     registerUser: (root, args, { user }) => {

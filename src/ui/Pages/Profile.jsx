@@ -14,6 +14,7 @@ export const GET_USER_DETAILS = gql`
       name
     }
     userTrips(userId: $userId) {
+      _id
       origin {
         displayName
         latitude
@@ -39,6 +40,7 @@ export const Profile = ({ match }) => {
     variables: { userId: match.params.userId }
   });
   if (!data) return null;
+  console.log("userData", data);
   return (
     <div className="profile">
       <Row>

@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const connectToMongoDB = require("./db_client");
 const _ = require("./db_helpers");
 
@@ -30,11 +31,11 @@ const internalMongoApi = db => ({
       .find(getUserRegex(userId), { sort: { timestamp: -1 } })
       .toArray();
   },
-  getTrip(id) {
-    return db.collection("trips").findOne({ _id: id });
-  },
-  deleteTrip(id) {
-    db.collection("trips").deleteOne({ _id: id });
+  deleteTrip: async (_id, userId) => {
+    const resp = await db
+      .collection("trips")
+      .deleteOne({ _id: ObjectId(_id), userId });
+    return resp ? resp.result.n : 0;
   },
   async addTrip(trip) {
     await db.collection("trips").insert(trip);

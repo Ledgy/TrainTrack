@@ -19,11 +19,20 @@ const client = new ApolloClient({
 });
 
 export const App = () => (
-  <ApolloProvider client={client}>
-    <Query query={GET_APP_DATA}>
-      {({ data }) =>
-        data ? <FirstStageBooster data={data} /> : <div>Loading…</div>
-      }
-    </Query>
-  </ApolloProvider>
+  <>
+    <ApolloProvider client={client}>
+      <Query query={GET_APP_DATA}>
+        {({ data }) =>
+          data ? <FirstStageBooster data={data} /> : <div>Loading…</div>
+        }
+      </Query>
+    </ApolloProvider>
+    <footer className="p-1 text-center">
+      Engineered with lots of{" "}
+      <span role="img" aria-label="love">
+        👾 🌴 🍕 ❤️
+      </span>{" "}
+      by the Ledgy® team
+    </footer>
+  </>
 );

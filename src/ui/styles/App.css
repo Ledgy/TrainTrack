@@ -343,3 +343,12 @@ input:focus {
   font-size: 16px;
   height: 40px;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background-color: var(--green-200);
+  font-size: 12px;
+}

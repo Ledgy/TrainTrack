@@ -27,17 +27,17 @@ module.exports = api => ({
       const userId = context.user.sub;
       console.log("userId", userId);
       const { origin, destination } = args.trip;
-      // const distanceResult = await getDistance(
-      //   origin.displayName,
-      //   destination.displayName
-      // );
-      // console.log("distanceResult", distanceResult);
-      // const { distance, originName, destinationName } = distanceResult;
-      const { distance, originName, destinationName } = {
-        distance: 2000,
-        originName: origin.displayName,
-        destinationName: destination.displayName
-      };
+      const distanceResult = await getDistance(
+        origin.displayName,
+        destination.displayName
+      );
+      console.log("distanceResult", distanceResult);
+      const { distance, originName, destinationName } = distanceResult;
+      // const { distance, originName, destinationName } = {
+      //   distance: 2000,
+      //   originName: origin.displayName,
+      //   destinationName: destination.displayName
+      // };
       if (!distance) return null;
       const populatedTrip = {
         ...args.trip,

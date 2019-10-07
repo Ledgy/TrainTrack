@@ -1,5 +1,6 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
+import { Link } from "react-router-dom";
 import gql from "graphql-tag";
 import trainIcon from "../../static/trainIcon.png";
 import { formatDistance, formatTimestamp } from "../format";
@@ -46,6 +47,9 @@ export const Trips = ({ name, trips, refetch, isMe }) => {
   return (
     <div className="trip-card py-4">
       <h1>{`${name}’s trips`}</h1>
+      <h4>
+        <Link to="/">Add new trip</Link>
+      </h4>
       <div>
         {trips.map((trip, i) => (
           <TripRow

@@ -382,6 +382,7 @@ export const addTripsToMap = trips => {
           });
           line.setMap(map);
         } else {
+          setTimeout(() => drawTrip(t), 100);
           console.log("couldn't retrieve route", status);
         }
       });

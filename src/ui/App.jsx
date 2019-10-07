@@ -6,6 +6,7 @@ import { FirstStageBooster } from "./FirstStageBooster.jsx";
 
 import "./styles/App.css";
 import { Identity } from "./identity/Widget.jsx";
+import { GET_APP_DATA } from "./queries";
 
 import ttLogo from "../static/ttLogo.png";
 
@@ -24,50 +25,7 @@ const client = new ApolloClient({
 const DataFetcher = ({ render }) => (
   <ApolloProvider client={client}>
     <Query
-      query={gql`
-        {
-          user(userId: 10) {
-            name
-          }
-          userNames {
-            userId
-            name
-          }
-          statistics {
-            trips
-            distance
-          }
-          me
-          lastTrips {
-            origin {
-              displayName
-              latitude
-              longitude
-            }
-            destination {
-              displayName
-              latitude
-              longitude
-            }
-            timestamp
-            distance
-          }
-          myTrips {
-            origin {
-              displayName
-              latitude
-              longitude
-            }
-            destination {
-              displayName
-              latitude
-              longitude
-            }
-            timestamp
-            distance
-          }
-        }
-      `}
+      query={GET_APP_DATA}
     >
       {({ data }) => (data ? render(data) : <div>Loading ...</div>)}
     </Query>

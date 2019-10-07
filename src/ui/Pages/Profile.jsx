@@ -47,7 +47,10 @@ export const Profile = ({ match }) => {
       </div>
       <div className="row">
         <div className="col col-sm-12 col-lg-6">
-          <Trips trips={data.userTrips} name={data.userProfile.name} />
+          <Trips
+            trips={data.userTrips}
+            name={data.userProfile ? data.userProfile.name : "Unknown user"}
+          />
         </div>
         <div className="col col-sm-12 col-lg-6">
           <Map trips={data.userTrips} />

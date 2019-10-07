@@ -377,7 +377,7 @@ export const addTripsToMap = trips => {
         });
         line.setMap(map);
       } else {
-        console.log("couldn't retrieve route");
+        console.log("couldn't retrieve route", status);
       }
     });
   });

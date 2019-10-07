@@ -23,7 +23,7 @@ const TripRow = ({
     <p className="px-2">{origin.displayName.slice(0, 20)}</p>
     <img src={trainIcon} alt="Train Icon" className="trip-icon my-auto" />
     <p className="px-2">{destination.displayName.slice(0, 20)}</p>
-    <p className="px-2">{new Date(timestamp).toLocaleDateString()}</p>
+    <p className="px-2">{new Date(timestamp * 3600000).toLocaleDateString()}</p>
     <p className="px-2">{formatDistance(distance)}</p>
     <button
       className="button-remove"

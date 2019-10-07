@@ -6,9 +6,8 @@ const googleMapsClient = require("@google/maps").createClient({
 
 const getDistanceMatrix = (service, data) =>
   new Promise((resolve, reject) => {
-    service.distanceMatrix(data, (stringResponse, response) => {
-      console.log("stringResponse", stringResponse);
-      console.log("response", response);
+    service.distanceMatrix(data, (x, response) => {
+      console.log("google API response", response);
       if (response.status === 200 && response.json.status === "OK") {
         resolve(response);
       } else {

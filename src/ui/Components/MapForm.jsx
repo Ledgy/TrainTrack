@@ -82,7 +82,7 @@ export const MapForm = withRouter(({ history }) => {
     ]);
   }
   const { id } = JSON.parse(localStorage.getItem("user")) || {};
-  const shortId = getShortId(id);
+  const shortId = id ? getShortId(id) : "";
   return (
     <form
       className="form-layout"

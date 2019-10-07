@@ -32,11 +32,6 @@ module.exports = gql`
     distance: Int
   }
 
-  type Statistics {
-    trips: Int
-    distance: Int
-  }
-
   type Query {
     reloadFixtures: String
     hello: String
@@ -49,9 +44,15 @@ module.exports = gql`
     userStatistics(userId: ID!): Statistics
   }
 
+  input LocationInput {
+    latitude: Float
+    longitude: Float
+    displayName: String
+  }
+
   input TripInput {
-    origin: String
-    destination: String
+    origin: LocationInput
+    destination: LocationInput
     timestamp: Int
   }
 

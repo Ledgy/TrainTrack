@@ -5,7 +5,6 @@ module.exports = api => ({
     reloadFixtures: async (root, args, context) => {
       return api.reloadFixtures();
     },
-    statistics: () => api.getStatistics(),
     hello: async () => "Hello, world!",
     lastTrips: () => api.getLastTrips(),
     userTrips: (root, args) => api.getUserTrips(args.userId),
@@ -29,7 +28,10 @@ module.exports = api => ({
         (context.user_metadata && context.user_metadata.id) || "21";
 
       const { origin, destination } = args.trip;
-      const distanceResult = await getDistance(origin, destination);
+      const distanceResult = await getDistance(
+        origin.displayName,
+        destination.displayName
+      );
       const { distance, originName, destinationName } = distanceResult;
       if (!distance) return null;
       const populatedTrip = {

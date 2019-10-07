@@ -372,8 +372,8 @@ export const addTripsToMap = trips => {
           path,
           geodesic: true,
           strokeColor: "#41ead4",
-          strokeOpacity: 0.7,
-          strokeWeight: 5
+          strokeOpacity: 0.5,
+          strokeWeight: 3
         });
         line.setMap(map);
       }

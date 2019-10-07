@@ -2,11 +2,12 @@ const getDistance = require("./distanceApi");
 
 module.exports = api => ({
   Query: {
-    reloadFixtures: async (root, args, context) => {
+    reloadFixtures: async () => {
       return api.reloadFixtures();
     },
     hello: async () => "Hello, world!",
     lastTrips: () => api.getLastTrips(),
+    statistics: () => api.getStatistics(),
     userTrips: (root, args) => api.getUserTrips(args.userId),
     userStatistics: (root, args) => api.getStatistics(args.userId),
     userProfile: async (root, args) => api.getUser(args.userId),

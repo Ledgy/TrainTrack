@@ -36,9 +36,16 @@ const getStats = (trips, distance) => [
 ];
 
 export const Statistics = ({ trips, distance }) => {
+  if (!distance) {
+    return null;
+  }
   return (
-    <div className="d-inline-flex">
-      {getStats(trips, distance).map(stat => getStatisticsBox({ ...stat }))}
+    <div className="row">
+      <div className="col col-xs-12">
+        <div className="d-inline-flex">
+          {getStats(trips, distance).map(stat => getStatisticsBox({ ...stat }))}
+        </div>
+      </div>
     </div>
   );
 };

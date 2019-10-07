@@ -4,17 +4,17 @@ const sampleUsers = require("../../../fixtures/users.json");
 const _ = require("./db_helpers");
 
 const internalMongoApi = db => ({
-  async createLog(payload) {
-    return await db.collection("logs").insert(payload);
+  createLog(payload) {
+    return db.collection("logs").insert(payload);
   },
-  async createUser(payload) {
-    return await db.collection("users").insert(payload);
+  createUser(payload) {
+    return db.collection("users").insert(payload);
   },
-  async getUser(userId) {
-    return await db.collection("users").findOne({ userId });
+  getUser(userId) {
+    return db.collection("users").findOne({ userId });
   },
-  async getUserNames(userIds) {
-    return await db
+  getUserNames() {
+    return db
       .collection("users")
       .find({}, { projection: { userId: 1, name: 1 } })
       .toArray();
@@ -24,8 +24,8 @@ const internalMongoApi = db => ({
       .collection("trips")
       .find()
       .toArray(),
-  async getUserTrips(userId) {
-    return await db
+  getUserTrips(userId) {
+    return db
       .collection("trips")
       .find({ userId })
       .toArray();
@@ -37,13 +37,7 @@ const internalMongoApi = db => ({
     (await db
       .collection("trips")
       .aggregate([
-        {
-          $match: userId
-            ? {
-                userId
-              }
-            : {}
-        },
+        ...(userId ? [{ $match: { userId } }] : []),
         {
           $group: {
             _id: null,

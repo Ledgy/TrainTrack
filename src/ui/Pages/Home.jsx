@@ -6,11 +6,7 @@ import { Statistics } from "../Components/Statistics.jsx";
 
 export const Home = ({ data }) => (
   <div className="home">
-    <div className="row">
-      <div className="col col-xs-12">
-        <Statistics {...data.statistics} />
-      </div>
-    </div>
+    <Statistics {...data.statistics} />
     <div className="row">
       <div className="col col-xs-12">
         <MapForm data={data} />

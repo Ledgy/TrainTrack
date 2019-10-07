@@ -40,11 +40,8 @@ export const Profile = ({ match }) => {
   if (!data) return null;
   return (
     <div className="profile">
-      <div className="row">
-        <div className="col col-xs-12">
-          <Statistics {...data.userStatistics} />
-        </div>
-      </div>
+      <Statistics {...data.userStatistics} />
+
       <div className="row">
         <div className="col col-sm-12 col-lg-6">
           <Trips

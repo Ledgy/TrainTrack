@@ -9,7 +9,6 @@ const open = () => {
 
 export const Identity = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  console.log({ user });
   const updateToken = authenticatedUser => {
     if (authenticatedUser) {
       setUser(authenticatedUser);

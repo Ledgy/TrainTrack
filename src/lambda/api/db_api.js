@@ -1,6 +1,4 @@
 const connectToMongoDB = require("./db_client");
-const sampleTrips = require("../../../fixtures/trips.json");
-const sampleUsers = require("../../../fixtures/users.json");
 const _ = require("./db_helpers");
 
 const internalMongoApi = db => ({

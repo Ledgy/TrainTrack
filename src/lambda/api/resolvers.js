@@ -19,12 +19,10 @@ module.exports = api => ({
   },
   Mutation: {
     addTrip: async (root, args, context) => {
-      console.log("context", context);
-      if (!context.user_metadata || !args.trip) {
+      if (!context.user.sub || !args.trip) {
         return null;
       }
-      const userId = context.user_metadata.id;
-
+      const userId = context.user.sub;
       const { origin, destination } = args.trip;
       const distanceResult = await getDistance(
         origin.displayName,
@@ -44,7 +42,7 @@ module.exports = api => ({
     },
     deleteTrip: async (root, args, context) => {
       const trip = api.getTrip(args.id);
-      if (trip.userId !== context.user_metadata.id) return null; // TODO
+      if (trip.userId !== context.user.sub) return null;
       api.deleteTrip(args.id);
       return args.id;
     }

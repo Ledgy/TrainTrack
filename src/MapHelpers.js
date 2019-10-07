@@ -350,27 +350,28 @@ export const addTripsToMap = trips => {
   const directionsService = new window.google.maps.DirectionsService();
 
   trips.forEach((trip, index) => {
-    const origin = getGoogleLocationFromCoordinates(
-      trip.origin.latitude,
-      trip.origin.longitude
-    );
-    const destination = getGoogleLocationFromCoordinates(
-      trip.destination.latitude,
-      trip.destination.longitude
-    );
-    const request = {
-      origin,
-      destination,
-      ...routeOptions
-    };
-    const directionsRenderer = new window.google.maps.DirectionsRenderer({
-      suppressMarkers: true,
-      suppressInfoWindows: true
-    });
-    directionsRenderer.setMap(map);
-    const drawTrip = () => {
+    const drawTrip = t => {
+      const origin = getGoogleLocationFromCoordinates(
+        t.origin.latitude,
+        t.origin.longitude
+      );
+      const destination = getGoogleLocationFromCoordinates(
+        t.destination.latitude,
+        t.destination.longitude
+      );
+      const request = {
+        origin,
+        destination,
+        ...routeOptions
+      };
+      const directionsRenderer = new window.google.maps.DirectionsRenderer({
+        suppressMarkers: true,
+        suppressInfoWindows: true
+      });
+      directionsRenderer.setMap(map);
       directionsService.route(request, (response, status) => {
         if (status === "OK") {
+          console.log("drawing!");
           const path = response.routes[0].overview_path;
           const line = new google.maps.Polyline({
             path,
@@ -386,7 +387,7 @@ export const addTripsToMap = trips => {
       });
     };
 
-    setTimeout(drawTrip, index * 10);
+    setTimeout(() => drawTrip(trip), index * 100);
   });
 };
 

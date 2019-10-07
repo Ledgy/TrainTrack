@@ -376,6 +376,8 @@ export const addTripsToMap = trips => {
           strokeWeight: 2
         });
         line.setMap(map);
+      } else {
+        console.log("couldn't retrieve route");
       }
     });
   });

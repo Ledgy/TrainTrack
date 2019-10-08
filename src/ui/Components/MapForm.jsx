@@ -10,6 +10,7 @@ import { withRouter } from "react-router-dom";
 import { addTripToMap, routeOptions } from "../../MapHelpers";
 
 import { Row, Col } from "./Utilities.jsx";
+import { formatDistance } from "../format";
 
 const emptyState = { displayName: "", latitude: 0, longitude: 0 };
 
@@ -80,7 +81,9 @@ const AutocompletePlaceField = ({
   );
 };
 
-const colClass = "col-lg-3 d-flex flex-column my-2";
+const colClass1 = "col-lg-1 d-flex flex-column my-2";
+const colClass2 = "col-lg-2 d-flex flex-column my-2";
+const colClass3 = "col-lg-3 d-flex flex-column my-2";
 
 const ADD_TRIP = gql`
   mutation addTrip($trip: TripInput!) {
@@ -98,6 +101,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
   const [date, setDate] = useState("");
   const [pathString, setPathString] = useState("");
   const [previousPath, setPreviousPath] = useState(null);
+  const [distance, setDistance] = useState(null);
   const [addTrip] = useMutation(ADD_TRIP);
 
   const { mapObj } = window;
@@ -129,6 +133,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
         response.overview_path
       );
       setPreviousPath(line);
+      setDistance(response ? response.legs[0].distance.value : null);
     }
   };
 
@@ -150,13 +155,14 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
         setDestination(emptyState);
         setDate("");
         setPathString("");
+        setDistance(null);
         setTimeout(history.push(`/${userId}`), 1000);
         await refetch();
         refetchAppData();
       }}
     >
       <Row>
-        <Col className={colClass}>
+        <Col className={colClass3}>
           <AutocompletePlaceField
             place={origin}
             setPlace={setOrigin}
@@ -165,7 +171,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
             isOrigin
           />
         </Col>
-        <Col className={colClass}>
+        <Col className={colClass3}>
           <AutocompletePlaceField
             place={destination}
             setPlace={setDestination}
@@ -173,7 +179,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
             updatePath={updatePath}
           />
         </Col>
-        <Col className={colClass}>
+        <Col className={colClass3}>
           <div>
             <input
               type="date"
@@ -182,7 +188,12 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
             />
           </div>
         </Col>
-        <Col className={colClass}>
+        <Col className={colClass1}>
+          <div className="text-left my-auto">
+            {distance && formatDistance(distance)}
+          </div>
+        </Col>
+        <Col className={colClass2}>
           <button
             className="button-cta"
             type="submit"

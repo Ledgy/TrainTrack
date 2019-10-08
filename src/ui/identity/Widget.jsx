@@ -13,23 +13,32 @@ const REGISTER_USER = gql`
 `;
 
 export const Identity = withRouter(router => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [userId, setUserId] = useState(
+    JSON.parse(localStorage.getItem("userId"))
+  );
   const [registerUser] = useMutation(REGISTER_USER);
-  const handleLogin = authenticatedUser => {
-    if (authenticatedUser) {
-      setUser(authenticatedUser);
-      localStorage.setItem("user", JSON.stringify(authenticatedUser));
-      localStorage.setItem("token", authenticatedUser.token.access_token);
-      localStorage.setItem("userId", getShortId(authenticatedUser.id));
-      registerUser();
-    }
-  };
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
-    setUser(null);
+    setUserId(null);
+  };
+
+  const handleLogin = async authenticatedUser => {
+    if (authenticatedUser) {
+      try {
+        const token = await authenticatedUser.jwt();
+        const shortId = getShortId(authenticatedUser.id);
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", shortId);
+        setUserId(shortId);
+        registerUser();
+      } catch (e) {
+        console.log("Login failed", e);
+        handleLogout();
+      }
+    }
   };
 
   useEffect(() => {
@@ -39,7 +48,7 @@ export const Identity = withRouter(router => {
     netlifyIdentity.init();
   }, []);
 
-  if (!user) {
+  if (!userId) {
     return (
       <div className="d-flex">
         <button type="button" onClick={() => netlifyIdentity.open("signup")}>
@@ -57,11 +66,11 @@ export const Identity = withRouter(router => {
   }
   const homeRoute = "/";
   const isHomeRoute = router.location.pathname === homeRoute;
-  const isProfile = router.location.pathname.includes(getShortId(user.id));
+  const isProfile = router.location.pathname.includes(userId);
   return (
     <div className="d-flex">
       {isHomeRoute && !isProfile && (
-        <Link to={`/${getShortId(user.id)}`}>
+        <Link to={`/${userId}`}>
           <p className="Header-link">Profile</p>
         </Link>
       )}

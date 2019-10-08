@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
-import { addTripsToMap, initializeMap } from "../../MapHelpers";
-
-const decodePath = pathString =>
-  window.google.maps.geometry.encoding.decodePath(pathString);
+import {
+  addTripsToMap,
+  initializeMap,
+  convertTripsToPaths
+} from "../../MapHelpers";
 
 export const Map = ({ trips }) => {
   useEffect(() => {
     initializeMap();
-    addTripsToMap(
-      trips.reduce(
-        (res, v) => (v.path ? [...res, decodePath(v.path)] : res),
-        []
-      )
-    );
+    addTripsToMap(convertTripsToPaths(trips));
   }, []);
 
   return (

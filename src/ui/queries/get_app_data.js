@@ -6,6 +6,10 @@ export const GET_APP_DATA = gql`
       userId
       name
     }
+    leaderboard {
+      userId
+      distance
+    }
     statistics {
       trips
       distance

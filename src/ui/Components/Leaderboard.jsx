@@ -1,25 +1,9 @@
 import React from "react";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import { Link } from "react-router-dom";
 import { formatDistance, getShortId } from "../format.js";
 import { Row, Col } from "./Utilities.jsx";
 
-const GET_LEADERBOARD = gql`
-  {
-    userNames {
-      userId
-      name
-    }
-    leaderboard {
-      userId
-      distance
-    }
-  }
-`;
-
-export const Leaderboard = () => {
-  const { data } = useQuery(GET_LEADERBOARD);
+export const Leaderboard = ({ data }) => {
   if (!data) return null;
 
   const userNames = new Map(data.userNames.map(v => [v.userId, v.name]));

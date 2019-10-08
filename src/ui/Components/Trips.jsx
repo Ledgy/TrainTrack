@@ -1,9 +1,13 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { Link } from "react-router-dom";
 import gql from "graphql-tag";
 import trainIcon from "../../static/trainIcon.png";
 import { formatDistance, formatTimestamp } from "../format";
+import {
+  convertTripsToPaths,
+  addTripsToMap,
+  initializeMap
+} from "../../MapHelpers";
 
 const DELETE_TRIP = gql`
   mutation deleteTrip($id: ID!) {
@@ -19,6 +23,7 @@ const TripRow = ({
   distance,
   deleteTrip,
   refetch,
+  refetchAppData,
   isMe
 }) => (
   <div className="px-4 d-inline-flex trip-box">
@@ -31,9 +36,12 @@ const TripRow = ({
       <button
         className="button-remove"
         type="button"
-        onClick={() => {
-          deleteTrip({ variables: { id: _id } });
-          refetch();
+        onClick={async () => {
+          await deleteTrip({ variables: { id: _id } });
+          const { data } = await refetch();
+          refetchAppData();
+          initializeMap();
+          addTripsToMap(convertTripsToPaths(data.userTrips));
         }}
       >
         <i className="fa fa-trash" />
@@ -42,14 +50,11 @@ const TripRow = ({
   </div>
 );
 
-export const Trips = ({ name, trips, refetch, isMe }) => {
+export const Trips = ({ name, trips, refetch, refetchAppData, isMe }) => {
   const [deleteTrip] = useMutation(DELETE_TRIP);
   return (
     <div className="trip-card py-4">
       <h1>{`${name}’s trips`}</h1>
-      <h4>
-        <Link to="/">Add new trip</Link>
-      </h4>
       <div>
         {trips.map((trip, i) => (
           <TripRow
@@ -58,6 +63,7 @@ export const Trips = ({ name, trips, refetch, isMe }) => {
             key={`${trip.timestamp}-${i}`}
             deleteTrip={deleteTrip}
             refetch={refetch}
+            refetchAppData={refetchAppData}
             isMe={isMe}
           />
         ))}

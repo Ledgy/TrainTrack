@@ -399,3 +399,9 @@ export const initializeMap = () => {
   const map = new window.google.maps.Map(mapContainer, mapOptions);
   window.mapObj = map;
 };
+
+export const decodePath = pathString =>
+  window.google.maps.geometry.encoding.decodePath(pathString);
+
+export const convertTripsToPaths = trips =>
+  trips.reduce((res, v) => (v.path ? [...res, decodePath(v.path)] : res), []);

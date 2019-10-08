@@ -22,8 +22,12 @@ export const App = () => (
   <>
     <ApolloProvider client={client}>
       <Query query={GET_APP_DATA}>
-        {({ data }) =>
-          data ? <FirstStageBooster data={data} /> : <div>Loading…</div>
+        {({ data, refetch }) =>
+          data ? (
+            <FirstStageBooster data={data} refetch={refetch} />
+          ) : (
+            <div>Loading…</div>
+          )
         }
       </Query>
     </ApolloProvider>

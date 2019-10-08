@@ -1,5 +1,4 @@
 import React from "react";
-import { MapForm } from "../Components/MapForm.jsx";
 import { Leaderboard } from "../Components/Leaderboard.jsx";
 import { Map } from "../Components/Map.jsx";
 import { Statistics } from "../Components/Statistics.jsx";
@@ -9,11 +8,6 @@ export const Home = ({ data }) => (
   <div className="home">
     <Row>
       <Statistics {...data.statistics} />
-    </Row>
-    <Row className="my-4">
-      <Col className="col col-xs-12">
-        <MapForm />
-      </Col>
     </Row>
     <Row className="my-4">
       <Col className="col col-12 col-lg-4">

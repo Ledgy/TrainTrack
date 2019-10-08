@@ -7,7 +7,7 @@ import { Identity } from "./identity/Widget.jsx";
 
 import ttLogo from "../static/ttLogo.png";
 
-export const FirstStageBooster = ({ data }) => (
+export const FirstStageBooster = ({ data, refetch }) => (
   <BrowserRouter>
     <div className="App">
       <header className="App-header">
@@ -17,9 +17,12 @@ export const FirstStageBooster = ({ data }) => (
         <Identity />
       </header>
       <Switch>
-        <Route path="/:userId" component={Profile} />
+        <Route
+          path="/:userId"
+          component={props => <Profile {...props} refetch={refetch} />}
+        />
         <Route path="/">
-          <Home data={data} />
+          <Home data={data} refetch={refetch} />
         </Route>
       </Switch>
     </div>

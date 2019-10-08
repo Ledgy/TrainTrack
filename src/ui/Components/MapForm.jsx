@@ -92,7 +92,7 @@ const ADD_TRIP = gql`
 
 const dateToHours = date => Math.round(new Date(date).getTime() / 3600000);
 
-export const MapForm = withRouter(({ history }) => {
+export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
   const [origin, setOrigin] = useState(emptyState);
   const [destination, setDestination] = useState(emptyState);
   const [date, setDate] = useState("");
@@ -120,7 +120,7 @@ export const MapForm = withRouter(({ history }) => {
       };
 
       const response = await getPath(tripRequest);
-      if (response) setPathString(response.overview_polyline);
+      setPathString(response ? response.overview_polyline : "");
       addTripsToMap([response.overview_path]);
     }
   };
@@ -144,6 +144,8 @@ export const MapForm = withRouter(({ history }) => {
         setDate("");
         setPathString("");
         setTimeout(history.push(`/${userId}`), 1000);
+        refetch();
+        refetchAppData();
       }}
     >
       <Row>
@@ -177,7 +179,9 @@ export const MapForm = withRouter(({ history }) => {
           <button
             className="button-cta"
             type="submit"
-            disabled={!origin || !destination || !date}
+            disabled={
+              !origin || !destination || !date || !userId || !pathString
+            }
           >
             Add Trip
           </button>

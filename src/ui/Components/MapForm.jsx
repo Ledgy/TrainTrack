@@ -20,12 +20,13 @@ const getGoogleLocationFromCoordinates = (longitude, latitude) =>
   new window.google.maps.LatLng(longitude, latitude);
 
 const getPath = request =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     directionsService.route(request, (response, status) => {
       if (status === "OK") {
         resolve(response.routes[0]);
       } else {
-        reject(response);
+        console.log("No route found", response);
+        resolve(null);
       }
     });
   });
@@ -102,6 +103,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
   const [pathString, setPathString] = useState("");
   const [previousPath, setPreviousPath] = useState(null);
   const [distance, setDistance] = useState(null);
+  const [isInvalidRoute, setInvalidRoute] = useState(false);
   const [addTrip] = useMutation(ADD_TRIP);
 
   const { mapObj } = window;
@@ -129,11 +131,14 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
       const response = await getPath(tripRequest);
       setPathString(response ? response.overview_polyline : "");
       if (previousPath) previousPath.setMap(null);
-      const line = addTripToMap(directionsService, mapObj, "#FF0000")(
-        response.overview_path
-      );
-      setPreviousPath(line);
+      if (response) {
+        const line = addTripToMap(directionsService, mapObj, "#FF0000")(
+          response.overview_path
+        );
+        setPreviousPath(line);
+      }
       setDistance(response ? response.legs[0].distance.value : null);
+      setInvalidRoute(!response);
     }
   };
 
@@ -156,6 +161,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
         setDate("");
         setPathString("");
         setDistance(null);
+        setInvalidRoute(false);
         setTimeout(history.push(`/${userId}`), 1000);
         await refetch();
         refetchAppData();
@@ -191,6 +197,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
         <Col className={colClass1}>
           <div className="text-left my-auto">
             {distance && formatDistance(distance)}
+            {isInvalidRoute && <small className="mt-2">No route… 😔</small>}
           </div>
         </Col>
         <Col className={colClass2}>
@@ -198,7 +205,12 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
             className="button-cta"
             type="submit"
             disabled={
-              !origin || !destination || !date || !userId || !pathString
+              !origin ||
+              !destination ||
+              !date ||
+              !userId ||
+              !pathString ||
+              isInvalidRoute
             }
           >
             Add Trip

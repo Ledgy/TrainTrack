@@ -374,14 +374,14 @@ const addTripToMap = (directionsService, map) => path => {
 export const addTripsToMap = paths => {
   if (!paths) return;
 
-  const { mapObj: map, google } = window;
-  if (!map || !google) {
+  const { mapObj, google } = window;
+  if (!mapObj || !google) {
     setTimeout(() => addTripsToMap(paths), 500);
     return;
   }
   const directionsService = new window.google.maps.DirectionsService();
 
-  asyncForEach(paths, addTripToMap(directionsService, map));
+  asyncForEach(paths, addTripToMap(directionsService, mapObj));
 };
 
 export const initializeMap = () => {

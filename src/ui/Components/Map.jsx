@@ -6,16 +6,13 @@ const decodePath = pathString =>
 
 export const Map = ({ trips }) => {
   useEffect(() => {
-    setTimeout(() => {
-      const paths = addTripsToMap(
-        trips.reduce(
-          (res, v) => (v.path ? [...res, decodePath(v.path)] : res),
-          []
-        )
-      );
-      initializeMap();
-      addTripsToMap(paths);
-    }, 500);
+    initializeMap();
+    addTripsToMap(
+      trips.reduce(
+        (res, v) => (v.path ? [...res, decodePath(v.path)] : res),
+        []
+      )
+    );
   }, []);
 
   return (

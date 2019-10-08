@@ -13,9 +13,7 @@ const REGISTER_USER = gql`
 `;
 
 export const Identity = withRouter(router => {
-  const [userId, setUserId] = useState(
-    JSON.parse(localStorage.getItem("userId"))
-  );
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const [registerUser] = useMutation(REGISTER_USER);
 
   const handleLogout = () => {

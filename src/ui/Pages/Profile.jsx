@@ -49,11 +49,13 @@ export const Profile = ({ match, refetch: refetchAppData }) => {
       <Row>
         <Statistics {...data.userStatistics} />
       </Row>
-      <Row className="my-4">
-        <Col className="col col-xs-12">
-          <MapForm refetch={refetch} refetchAppData={refetchAppData} />
-        </Col>
-      </Row>
+      {isMe && (
+        <Row className="my-4">
+          <Col className="col col-xs-12">
+            <MapForm refetch={refetch} refetchAppData={refetchAppData} />
+          </Col>
+        </Row>
+      )}
       <Row className="my-4">
         <Col className="col-sm-12 col-lg-6">
           <Trips

@@ -40,25 +40,33 @@ export const Identity = () => {
 
   if (!user) {
     return (
-      <>
+      <div className="d-flex">
         <button type="button" onClick={() => netlifyIdentity.open("signup")}>
           Signup
         </button>
-        <button type="button" onClick={() => netlifyIdentity.open("login")}>
+        <button
+          type="button"
+          className="ml-4"
+          onClick={() => netlifyIdentity.open("login")}
+        >
           Login
         </button>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="d-flex">
       <Link to={`/${getShortId(user.id)}`}>
         <p className="Header-link">Profile</p>
       </Link>
-      <button type="button" onClick={() => netlifyIdentity.logout()}>
+      <button
+        type="button"
+        className="ml-4"
+        onClick={() => netlifyIdentity.logout()}
+      >
         Logout
       </button>
-    </>
+    </div>
   );
 };

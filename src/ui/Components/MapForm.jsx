@@ -7,7 +7,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { withRouter } from "react-router-dom";
 
-import { addTripsToMap, routeOptions } from "../../MapHelpers";
+import { addTripToMap, routeOptions } from "../../MapHelpers";
 
 import { Row, Col } from "./Utilities.jsx";
 
@@ -97,7 +97,10 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
   const [destination, setDestination] = useState(emptyState);
   const [date, setDate] = useState("");
   const [pathString, setPathString] = useState("");
+  const [previousPath, setPreviousPath] = useState(null);
   const [addTrip] = useMutation(ADD_TRIP);
+
+  const { mapObj } = window;
 
   const updatePath = async (newPlace, isOrigin) => {
     const newOrigin = isOrigin ? newPlace : origin;
@@ -121,7 +124,11 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
 
       const response = await getPath(tripRequest);
       setPathString(response ? response.overview_polyline : "");
-      addTripsToMap([response.overview_path]);
+      if (previousPath) previousPath.setMap(null);
+      const line = addTripToMap(directionsService, mapObj, "#FF0000")(
+        response.overview_path
+      );
+      setPreviousPath(line);
     }
   };
 

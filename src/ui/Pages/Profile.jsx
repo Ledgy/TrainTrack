@@ -52,7 +52,11 @@ export const Profile = ({ match, refetch: refetchAppData }) => {
       {isMe && (
         <Row className="my-4">
           <Col className="col col-xs-12">
-            <MapForm refetch={refetch} refetchAppData={refetchAppData} />
+            <MapForm
+              refetch={refetch}
+              refetchAppData={refetchAppData}
+              userTrips={data.userTrips}
+            />
           </Col>
         </Row>
       )}

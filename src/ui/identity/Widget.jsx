@@ -24,19 +24,20 @@ export const Identity = withRouter(router => {
   };
 
   const handleLogin = async authenticatedUser => {
-    try {
-      if (authenticatedUser) {
+    if (authenticatedUser) {
+      try {
         const token = await authenticatedUser.jwt();
         const shortId = getShortId(authenticatedUser.id);
         localStorage.setItem("token", token);
         localStorage.setItem("userId", shortId);
         setUserId(shortId);
         registerUser();
+        return;
+      } catch (e) {
+        console.log("Login failed", e);
       }
-    } catch (e) {
-      console.log("Login failed", e);
-      handleLogout();
     }
+    handleLogout();
   };
 
   useEffect(() => {
@@ -68,7 +69,7 @@ export const Identity = withRouter(router => {
   return (
     <div className="d-flex">
       {!isProfile && (
-        <Link to={`/${getShortId(userId)}`}>
+        <Link to={`/${userId}`}>
           <p className="Header-link">Profile</p>
         </Link>
       )}

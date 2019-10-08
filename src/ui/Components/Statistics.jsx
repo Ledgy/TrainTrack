@@ -28,7 +28,7 @@ const getStats = (trips, distance) => [
     icon: backpackIcon
   },
   {
-    title: "C02 saved",
+    title: "CO2 saved",
     value: formatCo2(distance),
     icon: saveIcon
   },

@@ -67,8 +67,8 @@ export const Identity = withRouter(router => {
   const isProfile = router.location.pathname.includes(userId);
   return (
     <div className="d-flex">
-      {isHomeRoute && !isProfile && (
-        <Link to={`/${userId}`}>
+      {!isProfile && (
+        <Link to={`/${getShortId(userId)}`}>
           <p className="Header-link">Profile</p>
         </Link>
       )}

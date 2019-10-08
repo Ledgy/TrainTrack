@@ -57,11 +57,19 @@ export const Identity = withRouter(router => {
   }
   const homeRoute = "/";
   const isHomeRoute = router.location.pathname === homeRoute;
+  const isProfile = router.location.pathname.includes(getShortId(user.id));
   return (
     <div className="d-flex">
-      <Link to={isHomeRoute ? `/${getShortId(user.id)}` : homeRoute}>
-        <p className="Header-link">{isHomeRoute ? "Profile" : "Home"}</p>
-      </Link>
+      {isHomeRoute && !isProfile && (
+        <Link to={`/${getShortId(user.id)}`}>
+          <p className="Header-link">Profile</p>
+        </Link>
+      )}
+      {!isHomeRoute && (
+        <Link to={homeRoute}>
+          <p className="Header-link">Home</p>
+        </Link>
+      )}
 
       <button
         type="button"

@@ -352,3 +352,11 @@ footer {
   background-color: var(--green-200);
   font-size: 12px;
 }
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-relative {
+  position: relative;
+}

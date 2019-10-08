@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import netlifyIdentity from "netlify-identity-widget";
 import gql from "graphql-tag";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+
 import { getShortId } from "../format.js";
 
 const REGISTER_USER = gql`
@@ -11,7 +12,7 @@ const REGISTER_USER = gql`
   }
 `;
 
-export const Identity = () => {
+export const Identity = withRouter(router => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [registerUser] = useMutation(REGISTER_USER);
   const handleLogin = authenticatedUser => {
@@ -54,12 +55,14 @@ export const Identity = () => {
       </div>
     );
   }
-
+  const homeRoute = "/";
+  const isHomeRoute = router.location.pathname === homeRoute;
   return (
     <div className="d-flex">
-      <Link to={`/${getShortId(user.id)}`}>
-        <p className="Header-link">Profile</p>
+      <Link to={isHomeRoute ? `/${getShortId(user.id)}` : homeRoute}>
+        <p className="Header-link">{isHomeRoute ? "Profile" : "Home"}</p>
       </Link>
+
       <button
         type="button"
         className="ml-4"
@@ -69,4 +72,4 @@ export const Identity = () => {
       </button>
     </div>
   );
-};
+});

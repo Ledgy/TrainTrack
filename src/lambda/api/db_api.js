@@ -72,7 +72,7 @@ const internalMongoApi = db => ({
       .aggregate([
         { $group: { _id: "$userId", distance: { $sum: "$distance" } } },
         { $sort: { distance: -1 } },
-        { $limit: 20 },
+        { $limit: 100 },
         { $project: { _id: 0, userId: "$_id", distance: 1 } }
       ])
       .toArray()

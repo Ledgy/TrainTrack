@@ -24,18 +24,18 @@ export const Identity = withRouter(router => {
   };
 
   const handleLogin = async authenticatedUser => {
-    if (authenticatedUser) {
-      try {
+    try {
+      if (authenticatedUser) {
         const token = await authenticatedUser.jwt();
         const shortId = getShortId(authenticatedUser.id);
         localStorage.setItem("token", token);
         localStorage.setItem("userId", shortId);
         setUserId(shortId);
         registerUser();
-      } catch (e) {
-        console.log("Login failed", e);
-        handleLogout();
       }
+    } catch (e) {
+      console.log("Login failed", e);
+      handleLogout();
     }
   };
 

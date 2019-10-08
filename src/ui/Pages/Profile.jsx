@@ -27,6 +27,7 @@ export const GET_USER_DETAILS = gql`
       }
       timestamp
       distance
+      path
     }
     userStatistics(userId: $userId) {
       trips

@@ -14,6 +14,7 @@ module.exports = gql`
     destination: Location
     timestamp: Int
     distance: Int
+    path: String
   }
 
   type UserProfile {
@@ -60,6 +61,7 @@ module.exports = gql`
     origin: LocationInput
     destination: LocationInput
     timestamp: Int
+    path: String
   }
 
   type Mutation {

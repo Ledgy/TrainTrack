@@ -23,6 +23,7 @@ export const GET_APP_DATA = gql`
       }
       timestamp
       distance
+      path
     }
   }
 `;

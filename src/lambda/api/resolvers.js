@@ -1,4 +1,4 @@
-const getDistance = require("./distanceApi");
+const polyline = require("polyline-extended");
 
 module.exports = api => ({
   Query: {
@@ -23,21 +23,12 @@ module.exports = api => ({
         return null;
       }
       const userId = context.user.sub;
-      console.log("userId", userId);
-      const { origin, destination } = args.trip;
-      const distanceResult = await getDistance(
-        origin.displayName,
-        destination.displayName
-      );
-      console.log("distanceResult", distanceResult);
-      const { distance, originName, destinationName } = distanceResult;
-      if (!distance) return null;
+      const { path } = args.trip;
+      const distance = Math.round(polyline.length(path, "meter"));
       const populatedTrip = {
         ...args.trip,
         userId,
-        distance,
-        origin: { ...origin, displayName: originName },
-        destination: { ...destination, displayName: destinationName }
+        distance
       };
       api.addTrip(populatedTrip);
       return populatedTrip;

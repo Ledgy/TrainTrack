@@ -7,18 +7,46 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { withRouter } from "react-router-dom";
 
-import { addTripsToMap } from "../../MapHelpers";
+import { addTripsToMap, routeOptions } from "../../MapHelpers";
 
 import { Row, Col } from "./Utilities.jsx";
 
 const emptyState = { displayName: "", latitude: 0, longitude: 0 };
 
-const AutocompletePlaceField = ({ place, setPlace, placeholder }) => {
+const directionsService = new window.google.maps.DirectionsService();
+
+const getGoogleLocationFromCoordinates = (longitude, latitude) =>
+  new window.google.maps.LatLng(longitude, latitude);
+
+const getPath = request =>
+  new Promise((resolve, reject) => {
+    directionsService.route(request, (response, status) => {
+      if (status === "OK") {
+        resolve(response.routes[0]);
+      } else {
+        reject(response);
+      }
+    });
+  });
+
+const AutocompletePlaceField = ({
+  place,
+  setPlace,
+  placeholder,
+  updatePath,
+  isOrigin
+}) => {
   const handleSelect = async address => {
     const [result] = await geocodeByAddress(address);
     const { lat, lng } = await getLatLng(result);
     const { formatted_address } = result; // eslint-disable-line camelcase
-    setPlace({ displayName: formatted_address, latitude: lat, longitude: lng });
+    const newPlace = {
+      displayName: formatted_address,
+      latitude: lat,
+      longitude: lng
+    };
+    setPlace(newPlace);
+    updatePath(newPlace, isOrigin);
   };
   return (
     <PlacesAutocomplete
@@ -68,18 +96,35 @@ export const MapForm = withRouter(({ history }) => {
   const [origin, setOrigin] = useState(emptyState);
   const [destination, setDestination] = useState(emptyState);
   const [date, setDate] = useState("");
+  const [pathString, setPathString] = useState("");
   const [addTrip] = useMutation(ADD_TRIP);
-  if (origin.latitude && destination.latitude) {
-    addTripsToMap([
-      {
-        origin: { latitude: origin.latitude, longitude: origin.longitude },
-        destination: {
-          latitude: destination.latitude,
-          longitude: destination.longitude
-        }
-      }
-    ]);
-  }
+
+  const updatePath = async (newPlace, isOrigin) => {
+    const newOrigin = isOrigin ? newPlace : origin;
+    const newDestination = isOrigin ? destination : newPlace;
+
+    if (newOrigin.latitude && newDestination.latitude) {
+      const googleOrigin = getGoogleLocationFromCoordinates(
+        newOrigin.latitude,
+        newOrigin.longitude
+      );
+      const googleDestination = getGoogleLocationFromCoordinates(
+        newDestination.latitude,
+        newDestination.longitude
+      );
+
+      const tripRequest = {
+        origin: googleOrigin,
+        destination: googleDestination,
+        ...routeOptions
+      };
+
+      const response = await getPath(tripRequest);
+      if (response) setPathString(response.overview_polyline);
+      addTripsToMap([response.overview_path]);
+    }
+  };
+
   const userId = localStorage.getItem("userId");
   return (
     <form
@@ -90,12 +135,14 @@ export const MapForm = withRouter(({ history }) => {
         const trip = {
           origin,
           destination,
-          timestamp
+          timestamp,
+          path: pathString
         };
         await addTrip({ variables: { trip } });
         setOrigin(emptyState);
         setDestination(emptyState);
         setDate("");
+        setPathString("");
         setTimeout(history.push(`/${userId}`), 1000);
       }}
     >
@@ -105,6 +152,8 @@ export const MapForm = withRouter(({ history }) => {
             place={origin}
             setPlace={setOrigin}
             placeholder="Origin"
+            updatePath={updatePath}
+            isOrigin
           />
         </Col>
         <Col className={colClass}>
@@ -112,6 +161,7 @@ export const MapForm = withRouter(({ history }) => {
             place={destination}
             setPlace={setDestination}
             placeholder="Destination"
+            updatePath={updatePath}
           />
         </Col>
         <Col className={colClass}>
@@ -127,7 +177,7 @@ export const MapForm = withRouter(({ history }) => {
           <button
             className="button-cta"
             type="submit"
-            disabled={!origin || !destination || !date || !userId}
+            disabled={!origin || !destination || !date}
           >
             Add Trip
           </button>

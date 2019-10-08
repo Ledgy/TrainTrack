@@ -23,7 +23,7 @@ const internalMongoApi = db => ({
   getLastTrips: () =>
     db
       .collection("trips")
-      .find({}, { sort: { timestamp: -1 }, limit: 20 })
+      .find({}, { sort: { timestamp: -1 }, limit: 100 })
       .toArray(),
   getUserTrips(userId) {
     return db
@@ -72,7 +72,7 @@ const internalMongoApi = db => ({
       .aggregate([
         { $group: { _id: "$userId", distance: { $sum: "$distance" } } },
         { $sort: { distance: -1 } },
-        { $limit: 100 },
+        { $limit: 20 },
         { $project: { _id: 0, userId: "$_id", distance: 1 } }
       ])
       .toArray()

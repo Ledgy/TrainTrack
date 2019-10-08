@@ -144,7 +144,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
         setDate("");
         setPathString("");
         setTimeout(history.push(`/${userId}`), 1000);
-        refetch();
+        await refetch();
         refetchAppData();
       }}
     >

@@ -68,17 +68,16 @@ export const Identity = withRouter(router => {
   const isProfile = router.location.pathname.includes(userId);
   return (
     <div className="d-flex">
+      {!isHomeRoute && (
+        <Link to={homeRoute}>
+          <p className="Header-link mr-2">Home</p>
+        </Link>
+      )}
       {!isProfile && (
-        <Link to={`/${userId}`}>
+        <Link to={`/${getShortId(userId)}`}>
           <p className="Header-link">Profile</p>
         </Link>
       )}
-      {!isHomeRoute && (
-        <Link to={homeRoute}>
-          <p className="Header-link">Home</p>
-        </Link>
-      )}
-
       <button
         type="button"
         className="ml-4"

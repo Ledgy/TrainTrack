@@ -195,7 +195,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
           </div>
         </Col>
         <Col className={colClass1}>
-          <div className="text-left my-auto">
+          <div className="my-auto">
             {distance && formatDistance(distance)}
             {isInvalidRoute && <small className="mt-2">No route… 😔</small>}
           </div>

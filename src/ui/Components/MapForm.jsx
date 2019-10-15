@@ -7,7 +7,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { withRouter } from "react-router-dom";
 
-import { addTripToMap, routeOptions } from "../../MapHelpers";
+import { addTripToMap } from "../../MapHelpers";
 
 import { Row, Col } from "./Utilities.jsx";
 import { formatDistance } from "../format";
@@ -16,20 +16,31 @@ const emptyState = { displayName: "", latitude: 0, longitude: 0 };
 
 const directionsService = new window.google.maps.DirectionsService();
 
-const getGoogleLocationFromCoordinates = (longitude, latitude) =>
-  new window.google.maps.LatLng(longitude, latitude);
+const rome2rioApiUrl = "https://www.rome2rio.com/api/1.5/json/Search";
+const rome2rioSearchOptions =
+  "key=oK8vkE5x&noAir&noAirLeg&noBus&noFerry&noCar&noBikeshare&noRideshare&noTowncar&noCommuter&noSpecial&noMinorStart&noMinorEnd&noPrice&noStop";
 
-const getPath = request =>
-  new Promise(resolve => {
-    directionsService.route(request, (response, status) => {
-      if (status === "OK") {
-        resolve(response.routes[0]);
-      } else {
-        console.log("No route found", response);
-        resolve(null);
-      }
-    });
-  });
+const getPath = async (origin, destination) => {
+  try {
+    const result = await fetch(
+      `${rome2rioApiUrl}?oName=${encodeURIComponent(
+        origin
+      )}&dName=${encodeURIComponent(destination)}&${rome2rioSearchOptions}`
+    );
+    const { paths, routes } = await result.json();
+    const path = routes[0].segments.reduce(
+      (res, idx) => [
+        ...res,
+        ...window.google.maps.geometry.encoding.decodePath(paths[idx])
+      ],
+      []
+    );
+    return path;
+  } catch (e) {
+    console.log("Route not found", e);
+    return [];
+  }
+};
 
 const AutocompletePlaceField = ({
   place,
@@ -112,33 +123,28 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
     const newOrigin = isOrigin ? newPlace : origin;
     const newDestination = isOrigin ? destination : newPlace;
 
-    if (newOrigin.latitude && newDestination.latitude) {
-      const googleOrigin = getGoogleLocationFromCoordinates(
-        newOrigin.latitude,
-        newOrigin.longitude
-      );
-      const googleDestination = getGoogleLocationFromCoordinates(
-        newDestination.latitude,
-        newDestination.longitude
+    if (newOrigin.displayName && newDestination.displayName) {
+      const path = await getPath(
+        newOrigin.displayName,
+        newDestination.displayName
       );
 
-      const tripRequest = {
-        origin: googleOrigin,
-        destination: googleDestination,
-        ...routeOptions
-      };
-
-      const response = await getPath(tripRequest);
-      setPathString(response ? response.overview_polyline : "");
       if (previousPath) previousPath.setMap(null);
-      if (response) {
-        const line = addTripToMap(directionsService, mapObj, "#FF0000")(
-          response.overview_path
-        );
+      if (path.length > 0) {
+        console.log(window.google.maps.geometry.encoding.encodePath(path));
+        setPathString(window.google.maps.geometry.encoding.encodePath(path));
+        const line = addTripToMap(directionsService, mapObj, "#FF0000")(path);
         setPreviousPath(line);
+        const pathDistance = window.google.maps.geometry.spherical.computeLength(
+          path
+        );
+        setDistance(pathDistance);
+        setInvalidRoute(false);
+      } else {
+        setPathString("");
+        setDistance(null);
+        setInvalidRoute(true);
       }
-      setDistance(response ? response.legs[0].distance.value : null);
-      setInvalidRoute(!response);
     }
   };
 

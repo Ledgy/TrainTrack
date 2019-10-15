@@ -131,7 +131,6 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
 
       if (previousPath) previousPath.setMap(null);
       if (path.length > 0) {
-        console.log(window.google.maps.geometry.encoding.encodePath(path));
         setPathString(window.google.maps.geometry.encoding.encodePath(path));
         const line = addTripToMap(directionsService, mapObj, "#FF0000")(path);
         setPreviousPath(line);

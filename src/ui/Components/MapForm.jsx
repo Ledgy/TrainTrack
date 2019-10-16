@@ -25,7 +25,8 @@ const getPath = async (origin, destination) => {
     const result = await fetch(
       `${rome2rioApiUrl}?oName=${encodeURIComponent(
         origin
-      )}&dName=${encodeURIComponent(destination)}&${rome2rioSearchOptions}`
+      )}&dName=${encodeURIComponent(destination)}&${rome2rioSearchOptions}`,
+      { referrerPolicy: "no-referrer" }
     );
     const { paths, routes } = await result.json();
     const path = routes[0].segments.reduce(

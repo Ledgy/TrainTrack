@@ -26,27 +26,32 @@ const TripRow = ({
   refetchAppData,
   isMe
 }) => (
-  <div className="px-4 d-inline-flex trip-box">
-    <p className="px-2">{origin.displayName.slice(0, 20)}</p>
-    <img src={trainIcon} alt="Train Icon" className="trip-icon my-auto" />
-    <p className="my-auto px-2">{destination.displayName.slice(0, 20)}</p>
-    <p className="my-auto px-2">{formatTimestamp(timestamp)}</p>
-    <p className="my-auto px-2">{formatDistance(distance)}</p>
-    {true && (
-      <button
-        className="button-remove my-auto"
-        type="button"
-        onClick={async () => {
-          await deleteTrip({ variables: { id: _id } });
-          const { data } = await refetch();
-          refetchAppData();
-          initializeMap();
-          addTripsToMap(convertTripsToPaths(data.userTrips));
-        }}
-      >
-        <i className="fa fa-trash" />
-      </button>
-    )}
+  <div>
+    <div className="px-2 d-inline-flex">
+      <p className="px-2">{origin.displayName.slice(0, 20)}</p>
+      <img src={trainIcon} alt="Train Icon" className="trip-icon my-auto" />
+      <p className="my-auto px-2">{destination.displayName.slice(0, 20)}</p>
+    </div>
+    <div className="px-2 d-inline-flex">
+      <p className="my-auto px-2">{formatTimestamp(timestamp)}</p>
+      <p className="my-auto px-2">{formatDistance(distance)}</p>
+      {isMe && (
+        <button
+          className="button-remove my-auto"
+          type="button"
+          onClick={async () => {
+            await deleteTrip({ variables: { id: _id } });
+            const { data } = await refetch();
+            refetchAppData();
+            initializeMap();
+            addTripsToMap(convertTripsToPaths(data.userTrips));
+          }}
+        >
+          <i className="fa fa-trash" />
+        </button>
+      )}
+    </div>
+    <hr className="mx-auto trip-divider" />
   </div>
 );
 
@@ -56,6 +61,7 @@ export const Trips = ({ name, trips, refetch, refetchAppData, isMe }) => {
     <div className="trip-card py-4">
       <h1>{`${name}’s trips`}</h1>
       <div>
+        <hr className="mx-auto trip-divider" />
         {trips.map((trip, i) => (
           <TripRow
             {...trip}

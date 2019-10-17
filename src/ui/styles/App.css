@@ -279,6 +279,11 @@ a {
   height: 16px;
 }
 
+.trip-divider {
+  width: 30%;
+  border: 1px dashed var(--green-500);
+}
+
 .form-layout {
   padding: 24px;
   background: var(--white);

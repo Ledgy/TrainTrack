@@ -7,7 +7,7 @@ import { formatDistance, formatCo2, formatMoneySaved } from "../format";
 import { Col } from "./Utilities.jsx";
 
 const StatisticsBox = ({ title, value, icon }) => (
-  <div className="px-3 statistics-box align-self-center">
+  <div className="h-100 px-3 statistics-box align-self-center">
     <div className="d-flex align-items-center justify-content-center mb-2">
       <img src={icon} alt={title} height="45px" className="mr-2" />
       {value && <h2>{value}</h2>}

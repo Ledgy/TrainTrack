@@ -23,7 +23,7 @@ const Footer = () => (
   <footer className="p-1 text-center">
     Engineered with lots of{" "}
     <span role="img" aria-label="love">
-      👾🌴🍕❤️
+      👾🌴🇨🇭🍕❤️
     </span>{" "}
     by the{" "}
     <a href="https://ledgy.com/about-us/" {...targetBlank}>

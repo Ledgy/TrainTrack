@@ -33,7 +33,7 @@ const getStats = (trips, distance) => [
     icon: saveIcon
   },
   {
-    title: "Money saved",
+    title: "Compensation saved",
     value: formatMoneySaved(distance),
     icon: offsetIcon
   }

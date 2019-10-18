@@ -6,9 +6,24 @@ Keeping the world on track with _TrainTrack_!
 
 ## Setup
 
-#### Database
+Install mongodb locally (Mac):
 
-Checkout [Mongo DB setup steps](https://github.com/Ledgy/TrainTrack/wiki/Mongo-db-dev-setup).
+```
+brew tap mongodb/brew
+brew install mongodb-community@4.0
+```
+
+To run mongodb once:
+
+```
+mongod --config /usr/local/etc/mongod.conf
+```
+
+To automatically run mongodb after login::
+
+```
+brew services start mongodb/brew/mongodb-community@4.0
+```
 
 #### Environment
 

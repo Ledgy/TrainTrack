@@ -19,7 +19,7 @@ To run mongodb once:
 mongod --config /usr/local/etc/mongod.conf
 ```
 
-To run mongodb started at login:
+To automatically run mongodb after login::
 
 ```
 brew services start mongodb/brew/mongodb-community@4.0

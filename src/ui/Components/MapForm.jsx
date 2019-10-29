@@ -38,7 +38,7 @@ const getPath = async (origin, destination) => {
     );
     return path;
   } catch (e) {
-    console.log("Route not found", e);
+    console.log("Route not found", e); // eslint-disable-line no-console
     return [];
   }
 };
@@ -203,7 +203,14 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
         <Col className={colClass1}>
           <div className="my-auto">
             {distance && formatDistance(distance)}
-            {isInvalidRoute && <small className="mt-2">No route… 😔</small>}
+            {isInvalidRoute && (
+              <small className="mt-2">
+                No route…{" "}
+                <span role="img" aria-label="sorry">
+                  😔
+                </span>
+              </small>
+            )}
           </div>
         </Col>
         <Col className={colClass2}>

@@ -21,7 +21,7 @@ To run mongodb once:
 mongod --config /usr/local/etc/mongod.conf
 ```
 
-To automatically run mongodb after login::
+To automatically run mongodb after login:
 
 ```
 brew services start mongodb/brew/mongodb-community@4.0
@@ -29,7 +29,7 @@ brew services start mongodb/brew/mongodb-community@4.0
 
 #### Environment
 
-We use [direnv] to autoload exported secrets from `.envrc` file, each time you enter in this project's folder.
+We use [direnv] to autoload exported secrets from the `.envrc` file, each time you enter in this project's folder.
 
 Run `direnv allow` after each time secrets are changed in `.envrc` (development secrets only).
 
@@ -60,7 +60,7 @@ export REACT_APP_MAPS_KEY=662607015
 netlify dev
 ```
 
-This will open a local server running at `http://localhost:3000` with your app
+This will open a local server running at `http://localhost:3000` with your app.
 
 Install `netlify` client:
 
@@ -84,7 +84,7 @@ yarn start:lambda
 
 This will open a local server running at `http://localhost:9000` serving your Lambda functions, updating as you make changes in the `src/lambda` folder.
 
-You can then access your functions directly at `http://localhost:9000/{function_name}`, but to access them with the app, you'll need to start the app dev server.
+You can then access your functions directly at `http://localhost:9000/{function_name}`. To access them with the app, you'll need to start the app dev server.
 
 ### Run the app dev server
 
@@ -100,8 +100,8 @@ Local in-app requests to the relative path `/.netlify/functions/*` will automati
 
 ### Test function individually
 
-Make sure, that all required servers are running as outlined above. To test the
-login callback you can then run the following. Please note, that `netlify` does
+Make sure that all required servers are running as outlined above. To test the
+login callback you can then run the following. Please note: `netlify` does
 not fully mock the user metadata yet.
 
 ```

@@ -16,7 +16,7 @@ const emptyState = { displayName: "", latitude: 0, longitude: 0 };
 
 const directionsService = new window.google.maps.DirectionsService();
 
-const rome2rioApiUrl = "https://www.rome2rio.com/api/1.5/json/Search";
+const rome2rioApiUrl = "https://www.rome2rio.com/api/1.4/json/Search";
 const rome2rioSearchOptions =
   "key=oK8vkE5x&noAir&noAirLeg&noBus&noFerry&noCar&noBikeshare&noRideshare&noTowncar&noCommuter&noSpecial&noMinorStart&noMinorEnd&noPrice&noStop";
 
@@ -28,11 +28,11 @@ const getPath = async (origin, destination) => {
       )}&dName=${encodeURIComponent(destination)}&${rome2rioSearchOptions}`,
       { referrerPolicy: "no-referrer" }
     );
-    const { paths, routes } = await result.json();
+    const { routes } = await result.json();
     const path = routes[0].segments.reduce(
-      (res, idx) => [
+      (res, segment) => [
         ...res,
-        ...window.google.maps.geometry.encoding.decodePath(paths[idx])
+        ...window.google.maps.geometry.encoding.decodePath(segment.path)
       ],
       []
     );

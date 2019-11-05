@@ -303,7 +303,6 @@ a {
 input {
   border-radius: var(--border-radius-small);
   font-family: 'Inter', sans-serif;
-  height: 40px;
   padding: 12px 8px;
   border: 1px solid var(--gray-400);
   font-size: 14px;
@@ -313,32 +312,8 @@ input:focus {
   border-color: var(--green-500);
 }
 
-.autocomplete-wrapper {
-  position: relative;
-}
-
-.autocomplete-dropdown-container {
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  right: 50%;
-  margin-left: calc(var(--form-field-width) * -0.5);
-  background-color: var(--white);
-  border-radius: var(--border-radius-small);
-  width: var(--form-field-width);
-  z-index: 100;
-}
-
-.autocomplete-item {
-  padding: 12px 8px;
-  border-radius: var(--border-radius-small);
-  cursor: pointer;
-  text-align: left;
-}
-
-.autocomplete-item.active {
-  background-color: var(--green-100);
-  color: var(--green-800);
+.dateInput {
+  height: 38px;
 }
 
 .button-cta {

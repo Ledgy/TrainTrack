@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from "react-places-autocomplete";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { withRouter } from "react-router-dom";
+import AsyncSelect from "react-select/async";
 
 import { addTripToMap } from "../../MapHelpers";
 
@@ -16,14 +13,14 @@ const emptyState = { displayName: "", latitude: 0, longitude: 0 };
 
 const directionsService = new window.google.maps.DirectionsService();
 
-const rome2rioApiUrl = "https://www.rome2rio.com/api/1.4/json/Search";
+const rome2rioApiUrl = "https://www.rome2rio.com/api/1.4/json";
 const rome2rioSearchOptions =
   "key=oK8vkE5x&noAir&noAirLeg&noBus&noFerry&noCar&noBikeshare&noRideshare&noTowncar&noCommuter&noSpecial&noMinorStart&noMinorEnd&noPrice&noStop";
 
 const getPath = async (origin, destination) => {
   try {
     const result = await fetch(
-      `${rome2rioApiUrl}?oName=${encodeURIComponent(
+      `${rome2rioApiUrl}/Search?oName=${encodeURIComponent(
         origin
       )}&dName=${encodeURIComponent(destination)}&${rome2rioSearchOptions}`,
       { referrerPolicy: "no-referrer" }
@@ -43,54 +40,44 @@ const getPath = async (origin, destination) => {
   }
 };
 
+const ignoreKinds = new Set(["airport", "admin1", "place"]);
+
+const getPlaces = async inputValue => {
+  const res = await fetch(
+    `${rome2rioApiUrl}/Autocomplete?query=${encodeURIComponent(inputValue)}`
+  );
+  const json = await res.json();
+  const cities = json.places.filter(v => !ignoreKinds.has(v.kind));
+  return cities.map(({ longName: value, lat, lng }) => ({
+    label: value,
+    value,
+    lat,
+    lng
+  }));
+};
+
 const AutocompletePlaceField = ({
-  place,
   setPlace,
   placeholder,
   updatePath,
   isOrigin
 }) => {
-  const handleSelect = async address => {
-    const [result] = await geocodeByAddress(address);
-    const { lat, lng } = await getLatLng(result);
-    const { formatted_address } = result; // eslint-disable-line camelcase
-    const newPlace = {
-      displayName: formatted_address,
-      latitude: lat,
-      longitude: lng
-    };
+  const handleSelect = ({ value, lat, lng }) => {
+    const newPlace = { displayName: value, latitude: lat, longitude: lng };
     setPlace(newPlace);
     updatePath(newPlace, isOrigin);
   };
   return (
-    <PlacesAutocomplete
-      value={place.displayName}
-      onChange={e => {
-        if (!e) setPlace(emptyState);
-        setPlace(prev => ({ ...prev, displayName: e }));
+    <AsyncSelect
+      cacheOptions
+      placeholder={placeholder}
+      loadOptions={getPlaces}
+      onChange={handleSelect}
+      openMenuOnClick={false}
+      styles={{
+        indicatorsContainer: () => ({ display: "none" })
       }}
-      onSelect={e => handleSelect(e)}
-      debounce={500}
-    >
-      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div className="autocomplete-wrapper">
-          <input {...getInputProps({ placeholder })} />
-          <div className="autocomplete-dropdown-container">
-            {loading && <div>Loading...</div>}
-            {suggestions.map(suggestion => {
-              const className = suggestion.active
-                ? "autocomplete-item active"
-                : "autocomplete-item";
-              return (
-                <div {...getSuggestionItemProps(suggestion, { className })}>
-                  <span>{suggestion.description}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </PlacesAutocomplete>
+    />
   );
 };
 
@@ -176,7 +163,6 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
       <Row>
         <Col className={colClass3}>
           <AutocompletePlaceField
-            place={origin}
             setPlace={setOrigin}
             placeholder="Origin"
             updatePath={updatePath}
@@ -185,7 +171,6 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
         </Col>
         <Col className={colClass3}>
           <AutocompletePlaceField
-            place={destination}
             setPlace={setDestination}
             placeholder="Destination"
             updatePath={updatePath}
@@ -195,6 +180,7 @@ export const MapForm = withRouter(({ history, refetch, refetchAppData }) => {
           <div>
             <input
               type="date"
+              className="dateInput"
               value={date}
               onChange={e => setDate(e.target.value)}
             />

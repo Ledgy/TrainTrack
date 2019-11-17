@@ -60,6 +60,7 @@ const internalMongoApi = db => ({
       ])
       .toArray())[0],
   async reloadFixtures() {
+    if (process.env.ENV !== 'development') return;
     if (!db) return "db not available";
     _.FIXTURES.forEach(([name, sampleData]) => {
       _.resetCollection(db, name, sampleData);

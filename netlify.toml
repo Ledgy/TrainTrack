@@ -7,6 +7,10 @@
 [context.deploy-preview]
   Command = "npm run build && npm run build:lambda"
 [[redirects]]
+  from = "/api/*"
+  to = "https://www.rome2rio.com/:splat"
+  status = 200
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

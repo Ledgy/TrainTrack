@@ -13,7 +13,7 @@ const emptyState = { displayName: "", latitude: 0, longitude: 0 };
 
 const directionsService = new window.google.maps.DirectionsService();
 
-const rome2rioApiUrl = "https://www.rome2rio.com/api/1.4/json";
+const rome2rioApiUrl = "/api/1.4/json";
 const rome2rioSearchOptions =
   "key=oK8vkE5x&noAir&noAirLeg&noBus&noFerry&noCar&noBikeshare&noRideshare&noTowncar&noCommuter&noSpecial&noMinorStart&noMinorEnd&noPrice&noStop";
 

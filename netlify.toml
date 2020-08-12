@@ -8,7 +8,7 @@
   Command = "CI='' npm run build && npm run build:lambda"
 [[redirects]]
   from = "/api/*"
-  to = "https://www.rome2rio.com/:splat"
+  to = "https://www.rome2rio.com/api/:splat"
   status = 200
 [[redirects]]
   from = "/*"

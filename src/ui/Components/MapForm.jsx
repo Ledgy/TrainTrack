@@ -44,7 +44,7 @@ const ignoreKinds = new Set(["airport", "admin1", "place"]);
 
 const getPlaces = async inputValue => {
   const res = await fetch(
-    `${rome2rioApiUrl}/Autocomplete?query=${encodeURIComponent(inputValue)}`
+    `${rome2rioApiUrl}/autocomplete?query=${encodeURIComponent(inputValue)}`
   );
   const json = await res.json();
   const cities = json.places.filter(v => !ignoreKinds.has(v.kind));
